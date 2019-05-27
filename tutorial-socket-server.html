@@ -19,6 +19,7 @@
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -50,7 +51,8 @@
 
 <article>
     <p><img src="documentation.svg" alt=""></p>
-<h2>Overview</h2><p>A Telnet or TLS raw connection server.</p>
+<h2>Overview</h2>
+<p>A Telnet or TLS raw connection server.</p>
 <pre class="prettyprint source lang-bash"><code>> telnet localhost 5000
 
 Trying 127.0.0.1...
@@ -83,7 +85,9 @@ roomAdd default Room
 {&quot;status&quot;:&quot;OK&quot;}
 
 say defaultRoom hooray!
-{&quot;status&quot;:&quot;OK&quot;,&quot;context&quot;:&quot;response&quot;,&quot;data&quot;:null,&quot;messageId&quot;:8}</code></pre><p>You can access actionhero's methods via a persistent socket connection. The default port for this type of communication is 5000. As this is a persistent connection, socket connections have actionhero's verbs available to them. These verbs are:</p>
+{&quot;status&quot;:&quot;OK&quot;,&quot;context&quot;:&quot;response&quot;,&quot;data&quot;:null,&quot;messageId&quot;:8}
+</code></pre>
+<p>You can access actionhero's methods via a persistent socket connection. The default port for this type of communication is 5000. As this is a persistent connection, socket connections have actionhero's verbs available to them. These verbs are:</p>
 <ul>
 <li><code>quit</code> disconnect from the session</li>
 <li><code>paramAdd</code> - save a singe variable to your connection. IE: ‘addParam screenName=evan'</li>
@@ -101,7 +105,8 @@ say defaultRoom hooray!
 <p>To help sort out the potential stream of messages a socket user may receive, it is best to understand the &quot;context&quot; of the response. For example, by default all actions set a context of &quot;response&quot; indicating that the message being sent to the client is response to a request they sent (either an action or a chat action like <code>say</code>). Messages sent by a user via the <code>say</code> command have the context of <code>user</code> indicating they came form a user. Messages resulting from data sent to the api (like an action) will have the <code>response</code> context.</p>
 <p>Every message returned also contains a <code>messageId</code>, starting from 1, which increments to count a response to each client request.  <code>say</code> messages do not increment <code>messageId</code>, which allows this count to be used by the client to map responses to queries.</p>
 <p><code>connection.type</code> for a TCP/Socket client is &quot;socket&quot;</p>
-<h2>Config Options</h2><pre class="prettyprint source lang-js"><code>exports['default'] = {
+<h2>Config Options</h2>
+<pre class="prettyprint source lang-js"><code>exports['default'] = {
   servers: {
     socket: function (api) {
       return {
@@ -123,7 +128,10 @@ say defaultRoom hooray!
       }
     }
   }
-}</code></pre><h2>TLS Encryption</h2><p>You can switch your TCP server to use TLS encryption if you desire. Just toggle the settings in <code>/config/servers/socket.js</code> and provide valid certificates. You can test this with the openSSL client rather than telnet <code>openssl s_client -connect 127.0.0.1:5000</code></p>
+}
+</code></pre>
+<h2>TLS Encryption</h2>
+<p>You can switch your TCP server to use TLS encryption if you desire. Just toggle the settings in <code>/config/servers/socket.js</code> and provide valid certificates. You can test this with the openSSL client rather than telnet <code>openssl s_client -connect 127.0.0.1:5000</code></p>
 <p>Note that if you wish to create a secure (tls) server, you will be required to complete the serverOptions hash with at least a cert and a keyfile:</p>
 <pre class="prettyprint source lang-js"><code>config.severs.socket = {
   // TCP or TLS?
@@ -133,7 +141,9 @@ say defaultRoom hooray!
     key: fs.readFileSync('certs/server-key.pem'),
     cert: fs.readFileSync('certs/server-cert.pem')
   }
-};</code></pre><p>You can connect like: <code>openssl s_client -connect 127.0.0.1:5000</code></p>
+};
+</code></pre>
+<p>You can connect like: <code>openssl s_client -connect 127.0.0.1:5000</code></p>
 <p>or from node:</p>
 <pre class="prettyprint source lang-js"><code>// Connecting over TLS from another node process
 const tls = require('tls');
@@ -154,7 +164,10 @@ cleartextStream.setEncoding('utf8')
 
 cleartextStream.on('data', function(data) {
   console.log(data)
-})</code></pre><h2>Files and Routes</h2><p>Connections over socket can also use the file action. There is no route for files.</p>
+})
+</code></pre>
+<h2>Files and Routes</h2>
+<p>Connections over socket can also use the file action. There is no route for files.</p>
 <ul>
 <li>Errors are returned in the normal way <code>{error: someError}</code> when they exist.</li>
 <li>A successful file transfer will return the raw file data in a single send(). There will be no headers set, nor will the content be JSON.  Plan accordingly!</li>
@@ -167,11 +180,15 @@ Escape character is '^]'.
 $ paramAdd file=simple.html
 {&quot;status&quot;:&quot;OK&quot;,&quot;context&quot;:&quot;response&quot;,&quot;messageId&quot;:1}
 $ file
-&lt;h1>ActionHero&lt;/h1>\nI am a flat file being served to you via the API from ./public/simple.html&lt;br /></code></pre><h2>JSON Parameters</h2><p>The default method of using actions for TCP clients is to use the methods above to set params to their session and then call actions inline. However, you can also communication via JSON, passing along params specific to each request.</p>
+&lt;h1>ActionHero&lt;/h1>\nI am a flat file being served to you via the API from ./public/simple.html&lt;br />
+</code></pre>
+<h2>JSON Parameters</h2>
+<p>The default method of using actions for TCP clients is to use the methods above to set params to their session and then call actions inline. However, you can also communication via JSON, passing along params specific to each request.</p>
 <ul>
 <li><code>{&quot;action&quot;: &quot;myAction&quot;, &quot;params&quot;: {&quot;key&quot;: &quot;value&quot;}}</code> is also a valid request over TCP</li>
 </ul>
-<h2>Client Suggestions</h2><p>The main <code>trick</code> to working with TCP/wire connections directly is to remember that you can have many ‘pending' requests at the same time. Also, the order in which you receive responses back can be variable. if you request <code>slowAction</code> and then <code>fastAction</code>, it's fairly likely that you will get a response to <code>fastAction</code> first.</p>
+<h2>Client Suggestions</h2>
+<p>The main <code>trick</code> to working with TCP/wire connections directly is to remember that you can have many ‘pending' requests at the same time. Also, the order in which you receive responses back can be variable. if you request <code>slowAction</code> and then <code>fastAction</code>, it's fairly likely that you will get a response to <code>fastAction</code> first.</p>
 <p>Note that only requests the client makes increment the <code>messageId</code>, but broadcasts do not (the <code>say</code> command, etc)</p>
 <p><a href="https://github.com/actionhero/actionhero-node-client">The actionhero Node Client Library</a> uses TCP/TLS connections, and makes use of actionhero's <code>messageId</code> parameter to keep track of requests, and keeps response callbacks for actions in a pending queue. For example:</p>
 <pre class="prettyprint source lang-js"><code>const path = require('path')
@@ -222,7 +239,8 @@ async function main () {
   console.log('all done!')
 }
 
-main()</code></pre>
+main()
+</code></pre>
 </article>
 
 </section>
@@ -234,7 +252,7 @@ main()</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

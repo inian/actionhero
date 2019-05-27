@@ -19,6 +19,7 @@
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -50,7 +51,8 @@
 
 <article>
     <p><img src="ops-tools.svg" alt=""></p>
-<h2>The ActionHero Binary</h2><p>The suggested method to run your ActionHero server is to use the included <code>./node_modules/.bin/actionhero</code> binary. Note that there is no <code>main.js</code> or specific start script your project needs. ActionHero handles this for you. Your ActionHero project simply needs to follow the proper directory conventions and it will be bootable.</p>
+<h2>The ActionHero Binary</h2>
+<p>The suggested method to run your ActionHero server is to use the included <code>./node_modules/.bin/actionhero</code> binary. Note that there is no <code>main.js</code> or specific start script your project needs. ActionHero handles this for you. Your ActionHero project simply needs to follow the proper directory conventions and it will be bootable.</p>
 <p>The help for this binary is as follows:</p>
 <pre class="prettyprint source"><code>--------------------------------------
 ACTIONHERO COMMAND >> help
@@ -173,7 +175,10 @@ Descriptions:
     [params] (optional)
 
 * version
-  description: return the ActionHero version within this project</code></pre><h2>Linking the ActionHero Binary</h2><p>ActionHero is not designed to function when installed globally.  Do not install ActionHero globally, using <code>npm install -g</code>.  Modern versions of NPM (v5+) allow you to also use the <code>npx</code> command, ie: <code>npx actionhero start cluster --workers=2</code>, which is a simple way to get to the ActionHero binary from the top-level of your project.  Otherwise defining <code>scripts</code> referencing actionhero in your <code>package.json</code> is the best way to run ActionHero:</p>
+  description: return the ActionHero version within this project
+</code></pre>
+<h2>Linking the ActionHero Binary</h2>
+<p>ActionHero is not designed to function when installed globally.  Do not install ActionHero globally, using <code>npm install -g</code>.  Modern versions of NPM (v5+) allow you to also use the <code>npx</code> command, ie: <code>npx actionhero start cluster --workers=2</code>, which is a simple way to get to the ActionHero binary from the top-level of your project.  Otherwise defining <code>scripts</code> referencing actionhero in your <code>package.json</code> is the best way to run ActionHero:</p>
 <pre class="prettyprint source lang-js"><code>{
   &quot;name&quot;: &quot;my ActionHero project&quot;,
   &quot;scripts&quot;: {
@@ -183,7 +188,10 @@ Descriptions:
     &quot;test&quot; : &quot;jest&quot;
   }
 }
-</code></pre><h2>Environments and Config</h2><p>By default, ActionHero will use the settings found in the <code>exports.default</code> blocks in <code>/config/</code>. However, you can set environment-specific overrides or changes. ActionHero inspects <code>process.env.NODE_ENV</code> to load up runtime configuration overrides from <code>exports.#{env}</code> blocks in your configuration files. This is the recommended way to have separate settings for staging and production.</p>
+
+</code></pre>
+<h2>Environments and Config</h2>
+<p>By default, ActionHero will use the settings found in the <code>exports.default</code> blocks in <code>/config/</code>. However, you can set environment-specific overrides or changes. ActionHero inspects <code>process.env.NODE_ENV</code> to load up runtime configuration overrides from <code>exports.#{env}</code> blocks in your configuration files. This is the recommended way to have separate settings for staging and production.</p>
 <p>The load order of configs is:</p>
 <ul>
 <li>default values in <code>/config</code></li>
@@ -207,8 +215,11 @@ exports.production = {
       safe: true
     }
   }
-}</code></pre><p>In the example above, we are defining <code>api.config.namespace.enabled</code> and <code>api.config.namespace.safe</code>. In all environments (NODE_ENV) <code>api.config.namespace.enabled = true</code> Only in production would <code>api.config.namespace.safe = true</code>, it is <code>false</code> everywhere else.</p>
-<h2>Programatic Use of ActionHero</h2><p>While <strong>NOT</strong> encouraged, you can always instantiate an ActionHero process yourself. Perhaps you wish to combine ActionHero with an existing project. Here is how! Take note that using these methods will not work for a cluster process, and only a single instance will be started within your project.</p>
+}
+</code></pre>
+<p>In the example above, we are defining <code>api.config.namespace.enabled</code> and <code>api.config.namespace.safe</code>. In all environments (NODE_ENV) <code>api.config.namespace.enabled = true</code> Only in production would <code>api.config.namespace.safe = true</code>, it is <code>false</code> everywhere else.</p>
+<h2>Programatic Use of ActionHero</h2>
+<p>While <strong>NOT</strong> encouraged, you can always instantiate an ActionHero process yourself. Perhaps you wish to combine ActionHero with an existing project. Here is how! Take note that using these methods will not work for a cluster process, and only a single instance will be started within your project.</p>
 <pre class="prettyprint source lang-js"><code>const {Process} = require(&quot;actionhero&quot;)
 const actionhero = new Process()
 
@@ -232,10 +243,13 @@ await sleep()
 api.log(&quot; >> stopping server...&quot;)
 await actionhero.stop()
 api.log(&quot; >> Stopped!&quot;)
-process.exit()</code></pre><p>Feel free to look at the source of <code>./node_modules/actionhero/bin/methods/start</code> to see how the main ActionHero server is implemented for more information.</p>
+process.exit()
+</code></pre>
+<p>Feel free to look at the source of <code>./node_modules/actionhero/bin/methods/start</code> to see how the main ActionHero server is implemented for more information.</p>
 <p>You can programmatically control an ActionHero server with <code>actionhero.start(params)</code>, <code>actionhero.stop()</code> and <code>actionhero.restart()</code></p>
 <p>From within ActionHero itself (actions, initializers, etc), you can use <code>api.commands.start</code>, <code>api.commands.stop</code>, and <code>api.commands.restart</code> to control the server.</p>
-<h2>Signals</h2><pre class="prettyprint source lang-bash"><code>> npx actionhero start cluster --workers=2
+<h2>Signals</h2>
+<pre class="prettyprint source lang-bash"><code>> npx actionhero start cluster --workers=2
 info: actionhero >> start cluster
 notice:  - STARTING CLUSTER -
 notice: pid: 41382
@@ -270,7 +284,9 @@ alert: worker 41901 (#1) has exited
 alert: worker 41904 (#2) has exited
 alert: worker 41906 (#3) has exited
 info: all workers gone
-notice: cluster complete, Bye!</code></pre><p>ActionHero is intended to be run on <code>*nix</code> operating systems. The <code>start</code> and <code>start cluster</code> commands provide support for signaling. (There is limited support for some of these commands in windows).</p>
+notice: cluster complete, Bye!
+</code></pre>
+<p>ActionHero is intended to be run on <code>*nix</code> operating systems. The <code>start</code> and <code>start cluster</code> commands provide support for signaling. (There is limited support for some of these commands in windows).</p>
 <p><strong>actionhero start</strong></p>
 <ul>
 <li><code>kill</code> / <code>term</code> / <code>int</code> : Process will attempt to &quot;gracefully&quot; shut down. That is, the worker will close all server connections (possibly sending a shutdown message to clients, depending on server type), stop all task workers, and eventually shut down. This action may take some time to fully complete.</li>
@@ -285,9 +301,11 @@ notice: cluster complete, Bye!</code></pre><p>ActionHero is intended to be run o
 <li><code>TTOU</code>: remove one worker</li>
 <li><code>TTIN</code>: add one worker</li>
 </ul>
-<h2>Shutting Down</h2><p>When using <code>actionhero start</code> or <code>actionhero start cluster</code>, when you signal ActionHero to stop via the signals above (or from within your running application via <code>api.commands.stop()</code>), actionhero will attempt to gracefully shutdown. This will include running any initializer's <code>stop()</code> method. This will close any open servers, and attempt to allow any running tasks to complete.</p>
+<h2>Shutting Down</h2>
+<p>When using <code>actionhero start</code> or <code>actionhero start cluster</code>, when you signal ActionHero to stop via the signals above (or from within your running application via <code>api.commands.stop()</code>), actionhero will attempt to gracefully shutdown. This will include running any initializer's <code>stop()</code> method. This will close any open servers, and attempt to allow any running tasks to complete.</p>
 <p>Because things sometimes go wrong, <code>actionhero start</code> and <code>actionhero start cluster</code> also have a &quot;emergency stop&quot; timeout. This defaults to 30 seconds, and is configurable via the <code>ACTIONHERO_SHUTDOWN_TIMEOUT</code> environment variable. Be sure that your tasks and actions can complete within that window, or else raise that shutdown limit.</p>
-<h2>Windows Specific Notes</h2><ul>
+<h2>Windows Specific Notes</h2>
+<ul>
 <li>Sometimes ActionHero may require a git-based module (rather than a NPM module). You will need to have git installed. Depending on how you installed git, it may not be available to the node shell. Be sure to have also installed references to git. You can also run node/npm install from the git shell.*   Sometimes, npm will not install the actionhero binary @ <code>/node_modules/.bin/actionhero</code>, but rather it will attempt to create a windows executable and wrapper. You can launch ActionHero directly with <code>./node_modules/actionhero/bin/actionhero</code></li>
 </ul>
 </article>
@@ -301,7 +319,7 @@ notice: cluster complete, Bye!</code></pre><p>ActionHero is intended to be run o
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

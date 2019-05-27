@@ -19,6 +19,7 @@
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -50,10 +51,12 @@
 
 <article>
     <p><img src="ops-tools.svg" alt=""></p>
-<h2>Overview</h2><p><strong>Warning: Don't use this in production!</strong></p>
+<h2>Overview</h2>
+<p><strong>Warning: Don't use this in production!</strong></p>
 <p>To enable development mode simply set <code>developmentMode: true</code> in your <code>config/api.js</code>.</p>
 <p>ActionHero's development mode is a little different than tools like <a href="https://github.com/remy/nodemon">nodemon</a> in that it tries hard not to restart the server process unless something drastic changes. Changes to routes, tasks, and actions can simply replace those already in memory when they are updated on disk. Other changes, like changes to <code>api.config</code> or initializers are more severe, and will restart the whole application.  Note that <code>api.config.general.developmentMode</code> is different from <code>NODE_ENV</code>, which by default is &quot;development&quot; (and is logged when ActionHero boots). <code>NODE_ENV</code> is used to determine which config settings to use, and has no effect on developmentMode.</p>
-<h2>Effects of Development Mode</h2><p>Development mode, when enabled, will poll for changes in your actions, tasks and initializers, and reload them on the fly.</p>
+<h2>Effects of Development Mode</h2>
+<p>Development mode, when enabled, will poll for changes in your actions, tasks and initializers, and reload them on the fly.</p>
 <p>Changes to Actions and Tasks will override the existing version in memory. Changes to an initializer or config will reboot your server automatically.</p>
 <ul>
 <li>Development Mode uses <code>fs.watchFile()</code> and may not work on all OSs / file systems.</li>
@@ -62,14 +65,19 @@
 <li>If you have changed the <code>task.frequency</code> of a periodic task, you will continue to use the old value until the task fires at least once after the change</li>
 <li>Changing <code>api.config</code>, initializers, or servers, will attempt to do a &quot;full&quot; reboot the server rather than just reload that component.</li>
 </ul>
-<h2>Watching Custom Files</h2><pre class="prettyprint source lang-js"><code>api.watchFileAndAct(path_to_file, () => {
+<h2>Watching Custom Files</h2>
+<pre class="prettyprint source lang-js"><code>api.watchFileAndAct(path_to_file, () => {
   api.log('rebooting due to config change: ' + path_to_file, 'info')
   api.commands.restart()
-});</code></pre><p>You can use ActionHero's <code>api.watchFileAndAct()</code> method to watch additional files your application may have.  Use this to extend developmentMode when adding new types of files, like database models.</p>
-<h2>Debugging</h2><p>Modern versions of node.js have built-in inspector capabilities.</p>
+});
+</code></pre>
+<p>You can use ActionHero's <code>api.watchFileAndAct()</code> method to watch additional files your application may have.  Use this to extend developmentMode when adding new types of files, like database models.</p>
+<h2>Debugging</h2>
+<p>Modern versions of node.js have built-in inspector capabilities.</p>
 <p>Run ActionHero with node's <code>--inspect</code> flag, ie: <code>node ./node_modules/.bin/actionhero --inspect start</code></p>
 <p>More info about new <a href="https://nodejs.org/en/docs/inspector">node inspector</a></p>
-<h2>REPL</h2><pre class="prettyprint source lang-bash"><code>actionhero console
+<h2>REPL</h2>
+<pre class="prettyprint source lang-bash"><code>actionhero console
 
 Running &quot;console&quot; task
 2015-11-14 17:48:01 - notice: *** starting actionhero ***
@@ -89,7 +97,9 @@ Running &quot;console&quot; task
 ‘randomNumber',
 ‘showDocumentation',
 ‘sleepTest',
-‘status' ]</code></pre><p>ActionHero has a command-line interface called a REPL! This means you can spin up a new instance of ActionHero and manually call all the methods on the <code>api</code> namespace. This combined with the new RPC tools make this a powerful debugging and development tool. Running <code>actionhero console</code> will load up a version of ActionHero in your terminal where you have access to the <code>api</code> object. This version of the server will <code>boot</code>, <code>initialize</code>, and <code>start</code>, but will skip booting any <code>servers</code>.  You will be connected to any databases per your initializers.</p>
+‘status' ]
+</code></pre>
+<p>ActionHero has a command-line interface called a REPL! This means you can spin up a new instance of ActionHero and manually call all the methods on the <code>api</code> namespace. This combined with the new RPC tools make this a powerful debugging and development tool. Running <code>actionhero console</code> will load up a version of ActionHero in your terminal where you have access to the <code>api</code> object. This version of the server will <code>boot</code>, <code>initialize</code>, and <code>start</code>, but will skip booting any <code>servers</code>.  You will be connected to any databases per your initializers.</p>
 <p>The REPL will:</p>
 <ul>
 <li>source <code>NODE_ENV</code> properly to load the config</li>
@@ -109,7 +119,7 @@ Running &quot;console&quot; task
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

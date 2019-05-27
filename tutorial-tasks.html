@@ -19,6 +19,7 @@
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -50,17 +51,20 @@
 
 <article>
     <p><img src="built-in-tasks.svg" alt=""></p>
-<h2>Overview</h2><p>Tasks are background jobs meant to be run separately from a client's request. They can be started by an action or by the server itself. With ActionHero, there is no need to run a separate daemon to process these jobs. ActionHero uses the <a href="https://github.com/taskrabbit/node-resque">node-resque</a> package to store and process tasks in a way compatible with the <a href="https://github.com/resque/resque">resque</a> ecosystem.</p>
+<h2>Overview</h2>
+<p>Tasks are background jobs meant to be run separately from a client's request. They can be started by an action or by the server itself. With ActionHero, there is no need to run a separate daemon to process these jobs. ActionHero uses the <a href="https://github.com/taskrabbit/node-resque">node-resque</a> package to store and process tasks in a way compatible with the <a href="https://github.com/resque/resque">resque</a> ecosystem.</p>
 <p>There are 3 types of tasks ActionHero can process: <code>normal</code>, <code>delayed</code>, and <code>periodic</code>.</p>
 <ul>
 <li><code>normal</code> tasks are enqueued and processed one-by-one by the task TaskProcessors</li>
 <li><code>delayed</code> tasks are enqueued in a special <code>delayed</code> queue to only be processed at some time in the future (defined either by a timestamp in ms or milliseconds-from-now)</li>
-<li><code>periodic</code> tasks are like delayed tasks, but they run on a set frequency (e.g. every 5 minutes).<ul>
+<li><code>periodic</code> tasks are like delayed tasks, but they run on a set frequency (e.g. every 5 minutes).
+<ul>
 <li>Periodic tasks can take no input parameters.</li>
 </ul>
 </li>
 </ul>
-<h2>Enqueing Tasks</h2><p>Here are examples of the 3 ways to programmatically enqueue a task:</p>
+<h2>Enqueing Tasks</h2>
+<p>Here are examples of the 3 ways to programmatically enqueue a task:</p>
 <pre class="prettyprint source lang-js"><code>// Enqueue the task now, and process it ASAP
 // api.tasks.enqueue(nameOfTask, args, queue)
 await api.tasks.enqueue(&quot;sendWelcomeEmail&quot;, {to: 'evan@evantahler.com'}, 'default')
@@ -71,10 +75,13 @@ await api.tasks.enqueueAt(1234556, &quot;sendWelcomeEmail&quot;, {to: 'evan@evan
 
 // Enqueue the task now, and process it once \`delay\` (ms) has passed
 // api.tasks.enqueueIn(delay, nameOfTask, args, queue)
-await api.tasks.enqueueIn(10000, &quot;sendWelcomeEmail&quot;, {to: 'evan@evantahler.com'}, 'default')</code></pre><p>&quot;sendWelcomeEmail&quot; should be a task defined in the project, and <code>{to: 'evan@evantahler.com'}</code> are arguments to that task. This task will be processed by TaskProcessors assigned to the &quot;default&quot; queue.</p>
+await api.tasks.enqueueIn(10000, &quot;sendWelcomeEmail&quot;, {to: 'evan@evantahler.com'}, 'default')
+</code></pre>
+<p>&quot;sendWelcomeEmail&quot; should be a task defined in the project, and <code>{to: 'evan@evantahler.com'}</code> are arguments to that task. This task will be processed by TaskProcessors assigned to the &quot;default&quot; queue.</p>
 <p>You can also enqueue tasks to be run at some time in the future (timestamp is in ms): <code>enqueueAt</code> asks for a timestamp (in ms) to run at, and <code>enqueueIn</code> asks for the number of ms from now to run.</p>
 <p>The final type of task, periodic tasks, are defined with a <code>task.frequency</code> of greater than 0, and are loaded in by ActionHero when it boots. You cannot modify these tasks once the server is running.</p>
-<h2>Processing Tasks</h2><pre class="prettyprint source lang-js"><code>// From /config/tasks.js:
+<h2>Processing Tasks</h2>
+<pre class="prettyprint source lang-js"><code>// From /config/tasks.js:
 
 exports.default = {
   tasks: function(api){
@@ -125,12 +132,15 @@ exports.default = {
       }
     }
   }
-}</code></pre><p>To work these tasks, you need to run ActionHero with at least one <code>taskProcessor</code>. <code>TaskProcessor</code>s run in-line with the rest of your server and process jobs. This is controlled by settings in <a href="https://github.com/actionhero/actionhero/blob/master/config/tasks.js">/config/tasks.js</a>.</p>
+}
+</code></pre>
+<p>To work these tasks, you need to run ActionHero with at least one <code>taskProcessor</code>. <code>TaskProcessor</code>s run in-line with the rest of your server and process jobs. This is controlled by settings in <a href="https://github.com/actionhero/actionhero/blob/master/config/tasks.js">/config/tasks.js</a>.</p>
 <p>If you are enqueuing delayed or periodic tasks, you also need to enable the scheduler. This is a part of ActionHero that will periodically check the delayed queues for jobs that are ready to work now, and move them to the normal queues when the time comes.</p>
 <p>Because node and ActionHero are asynchronous, we can process more than one job at a time. However, if the jobs we are processing are CPU-intensive, we want to limit how many we are working on at one time. To do this, we tell ActionHero to run somewhere between <code>minTaskProcessors</code> and <code>maxTaskProcessors</code> and check every so often if the server could be working more or less jobs at a time. Depending on the response characteristics you want for your server, you can modify these values.</p>
 <p>In production, it is best to set up some ActionHero servers that only handle requests from clients (that is, servers with no TaskProcessors) and others that handle no requests, and only process jobs (that is, no servers, many <code>TaskProcessor</code>s).</p>
 <p>As you noticed above, when you enqueue a task, you tell it which queue to be enqueued within. This is so you can separate load or priority. For example, you might have a <code>high</code> priority queue which does jobs like &quot;sendPushMessage&quot; and a <code>low</code> priority queue which does a task like &quot;cleanupCache&quot;. You tell the <code>taskProcessor</code>s which jobs to work, and in which priority. For the example above, you would ensure that all <code>high</code> jobs happen before all <code>low</code> jobs by setting: <code>api.config.tasks.queues = ['high', 'low']</code>. You could also configure more nodes to work on the <code>high</code> queue than the <code>low</code> queue, thus further ensuring that <code>high</code> priority jobs are processed faster and sooner than <code>low</code> priority jobs.</p>
-<h2>Creating A Task</h2><p>An few ways to define a task:</p>
+<h2>Creating A Task</h2>
+<p>An few ways to define a task:</p>
 <pre class="prettyprint source lang-js"><code>// define a single task in a file
 const {api, Task} = require('actionhero')
 
@@ -148,7 +158,9 @@ module.exports = class SendWelcomeMessage extends Task {
     await api.sendWelcomeEamail({address: data.email})
     return true
   }
-}</code></pre><p>You can also define more than one task in a file, exporting each with a separate <code>exports</code> directive, ie:.</p>
+}
+</code></pre>
+<p>You can also define more than one task in a file, exporting each with a separate <code>exports</code> directive, ie:.</p>
 <pre class="prettyprint source lang-js"><code>exports.SayHello = class SayHello extends Task {
   constructor () {
     super()
@@ -173,7 +185,9 @@ exports.SayGoodbye = class SayGoodbye extends Task {
   }
 
   async run () { api.log(&quot;goodbye&quot;) }
-}</code></pre><p>Output of the above:</p>
+}
+</code></pre>
+<p>Output of the above:</p>
 <pre class="prettyprint source lang-bash"><code># The output of running the last 2 tasks would be:
 
 2013-11-28 15:21:56 - debug: resque scheduler working timestamp 1385680913
@@ -185,7 +199,9 @@ exports.SayGoodbye = class SayGoodbye extends Task {
 2013-11-28 15:21:56 - debug: re-enqueued reccurent job sayHello
 2013-11-28 15:21:56 - debug: resque worker #1 working job default class=sayGoodbye, queue=default,
 2013-11-28 15:21:56 - info: goodbye
-2013-11-28 15:21:56 - debug: re-enqueued reccurent job sayGoodbye</code></pre><p>You can create you own tasks by placing them in a <code>./tasks/</code> directory at the root of your application. You can use the generator <code>actionhero generate task --name=myTask</code>. Like actions, all tasks have some required metadata:</p>
+2013-11-28 15:21:56 - debug: re-enqueued reccurent job sayGoodbye
+</code></pre>
+<p>You can create you own tasks by placing them in a <code>./tasks/</code> directory at the root of your application. You can use the generator <code>actionhero generate task --name=myTask</code>. Like actions, all tasks have some required metadata:</p>
 <ul>
 <li><code>task.name</code>: The unique name of your task</li>
 <li><code>task.description</code>: a description</li>
@@ -195,10 +211,11 @@ exports.SayGoodbye = class SayGoodbye extends Task {
 </ul>
 <p><code>task.run</code> contains the actual work that the task does. It takes the following arguments:</p>
 <ul>
-<li><code>params</code>: An array of parameters that the task was enqueued with. This is whatever was passed as the second argument to <code>api.tasks.enqueue</code>.  </li>
+<li><code>params</code>: An array of parameters that the task was enqueued with. This is whatever was passed as the second argument to <code>api.tasks.enqueue</code>.</li>
 </ul>
 <p>Throwing an error will stop the task, and log it as a failure in resque, which you can inspect via the various <a href="api.tasks.html">tasks</a> methods.  If a periodic task throws an error, it will not be run again.</p>
-<h2>Job Schedules</h2><p>You may want to schedule jobs every minute/hour/day, like a distributed CRON job. There are a number of excellent node packages to help you with this, like <a href="https://github.com/tejasmanohar/node-schedule">node-schedule</a> and <a href="https://github.com/ncb000gt/node-cron">node-cron</a>. ActionHero exposes <a href="https://github.com/taskrabbit/node-resque">node-resque's</a> scheduler to you so you can use the scheduler package of your choice.</p>
+<h2>Job Schedules</h2>
+<p>You may want to schedule jobs every minute/hour/day, like a distributed CRON job. There are a number of excellent node packages to help you with this, like <a href="https://github.com/tejasmanohar/node-schedule">node-schedule</a> and <a href="https://github.com/ncb000gt/node-cron">node-cron</a>. ActionHero exposes <a href="https://github.com/taskrabbit/node-resque">node-resque's</a> scheduler to you so you can use the scheduler package of your choice.</p>
 <p>Assuming you are running ActionHero across multiple machines, you will need to ensure that only one of your processes is actually scheduling the jobs. To help you with this, you can inspect which of the scheduler processes is correctly acting as master, and flag only the master scheduler process to run the schedule. An <a href="tutorial-initializers.html">initializer for this</a> would look like:</p>
 <pre class="prettyprint source lang-js"><code>// file: initializers/node_schedule.js
 
@@ -231,8 +248,11 @@ module.exports = class Scheduler extends Initializer {
   stop () {
     api.scheduledJobs.forEach((job) => { job.cancel() })
   }
-}</code></pre><p>Be sure to have the scheduler enabled on at least one of your ActionHero servers!</p>
-<h2>Failed Job Management</h2><p>Sometimes a worker crashes is a severe way, and it doesn't get the time/chance to notify redis that it is leaving the pool (this happens all the time on PAAS providers like Heroku). When this happens, you will not only need to extract the job from the now-zombie worker's &quot;working on&quot; status, but also remove the stuck worker. To aid you in these edge cases, <code>api.tasks.cleanOldWorkers(age)</code> is available.</p>
+}
+</code></pre>
+<p>Be sure to have the scheduler enabled on at least one of your ActionHero servers!</p>
+<h2>Failed Job Management</h2>
+<p>Sometimes a worker crashes is a severe way, and it doesn't get the time/chance to notify redis that it is leaving the pool (this happens all the time on PAAS providers like Heroku). When this happens, you will not only need to extract the job from the now-zombie worker's &quot;working on&quot; status, but also remove the stuck worker. To aid you in these edge cases, <code>api.tasks.cleanOldWorkers(age)</code> is available.</p>
 <p>Because there are no 'heartbeats' in resque, it is impossible for the application to know if a worker has been working on a long job or it is dead. You are required to provide an &quot;age&quot; for how long a worker has been &quot;working&quot;, and all those older than that age will be removed, and the job they are working on moved to the error queue (where you can then use <code>api.tasks.retryAndRemoveFailed</code>) to re-enqueue the job.</p>
 <p>You can handle this with an own initializer and the following logic:</p>
 <pre class="prettyprint source lang-js"><code>const removeStuckWorkersOlderThan = 10000; // 10000ms
@@ -240,7 +260,10 @@ api.log(`removing stuck workers solder than ${removeStuckWorkersOlderThan}ms`, '
 const result = api.tasks.cleanOldWorkers(removeStuckWorkersOlderThan)
 if(Object.keys(result).length > 0){
   api.log('removed stuck workers with errors: ', 'info', result);
-}</code></pre><h2>Notes</h2><p>Note that the <code>frequency</code>, <code>enqueueIn</code> and <code>enqueueAt</code> times are when a task is <strong>allowed</strong> to run, not when it <strong>will</strong> run. TaskProcessors will work tasks in a first-in-first-out manner. TaskProcessors also <code>sleep</code> when there is no work to do, and will take some time (default 5 seconds) to wake up and check for more work to do.</p>
+}
+</code></pre>
+<h2>Notes</h2>
+<p>Note that the <code>frequency</code>, <code>enqueueIn</code> and <code>enqueueAt</code> times are when a task is <strong>allowed</strong> to run, not when it <strong>will</strong> run. TaskProcessors will work tasks in a first-in-first-out manner. TaskProcessors also <code>sleep</code> when there is no work to do, and will take some time (default 5 seconds) to wake up and check for more work to do.</p>
 <p>Remember that each ActionHero server uses one thread and one event loop, so that if you have computationally intensive task (like computing Fibonacci numbers), this <strong>will</strong> block tasks, actions, and clients from working. However, if your tasks are meant to communicate with external services (reading from a database, sending an email, etc), then these are perfect candidates to be run simultaneously as the single thread can work on other things while waiting for these operations to complete.</p>
 <p>If you are running a single ActionHero server, all tasks will be run locally. As you add more servers, the work will be split evenly across all nodes. It is very likely that your job will be run on different nodes each time.</p>
 </article>
@@ -254,7 +277,7 @@ if(Object.keys(result).length > 0){
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
