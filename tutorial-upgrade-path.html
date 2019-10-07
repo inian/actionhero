@@ -64,6 +64,19 @@
 <li>in <code>config/servers/websocket.js</code> <code>add api.config.servers.websocket.client.cookieKey = api.config.servers.web.fingerprintOptions.cookieKey</code>.  This will instruct the ActionHero Websocket Clients to share the same cookie as the web server to share a fingerprint, which can be used to share session information.</li>
 <li>If you plan to use Jest for your tests, and want to test in parallel, you will need to configure your server in the test environment to make use of <code>process.env.JEST_WORKER_ID</code>.  Please view <a href="https://github.com/actionhero/actionhero/blob/master/config/api.js"><code>config/api.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/redis.js"><code>config/redis.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/socket.js"><code>config/servers/socket.js</code></a>, and <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/web.js"><code>config/servers/web.js</code></a> for more information</li>
 </ul>
+<h2>Upgrading from v19 to v20</h2>
+<p><strong>Full Release Notes: <a href="https://github.com/actionhero/actionhero/releases/tag/v20.0.0">GitHub</a></strong></p>
+<ul>
+<li>In <code>config/api.js</code> add <code>api.config.general.paths.test = [path.join(__dirname, '/../__tests__')]</code> so that when you generate a new action or task, the related test file can be generated as well.</li>
+<li>However you run actionhero, be sure to <code>cd</code> into the root directory of the project before starting the server.</li>
+</ul>
+<h2>Upgrading from v19 to v20</h2>
+<p><strong>Full Release Notes: <a href="https://github.com/actionhero/actionhero/releases/tag/v19.0.0">GitHub</a></strong></p>
+<ul>
+<li>in <code>config/tasks.js</code> <code>add api.config.tasks.stuckWorkerTimeout = 3600000</code>.  This will be a 1 hour timeout for stuck/crashed worker processes</li>
+<li>in <code>config/servers/websocket.js</code> <code>add api.config.servers.websocket.client.cookieKey = api.config.servers.web.fingerprintOptions.cookieKey</code>.  This will instruct the ActionHero Websocket Clients to share the same cookie as the web server to share a fingerprint, which can be used to share session information.</li>
+<li>If you plan to use Jest for your tests, and want to test in parallel, you will need to configure your server in the test environment to make use of <code>process.env.JEST_WORKER_ID</code>.  Please view <a href="https://github.com/actionhero/actionhero/blob/master/config/api.js"><code>config/api.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/redis.js"><code>config/redis.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/socket.js"><code>config/servers/socket.js</code></a>, and <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/web.js"><code>config/servers/web.js</code></a> for more information</li>
+</ul>
 <h2>Upgrading from v17 to v18</h2>
 <p><strong>Full Release Notes: <a href="https://github.com/actionhero/actionhero/releases/tag/v18.0.0">GitHub</a></strong></p>
 <p><strong>Breaking Changes and How to Overcome Them:</strong></p>
