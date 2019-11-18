@@ -393,6 +393,7 @@ exports.ActionVersion2 = <span class="hljs-class"><span class="hljs-keyword">cla
   <span class="hljs-attr">params</span>: { <span class="hljs-attr">action</span>: <span class="hljs-string">'randomNumber'</span>, <span class="hljs-attr">apiVersion</span>: <span class="hljs-number">1</span> },
   <span class="hljs-attr">actionStartTime</span>: <span class="hljs-number">123</span>,
   <span class="hljs-attr">response</span>: {},
+  <span class="hljs-attr">session</span>: {}
 }</code></pre>
 				<p>The goal of most actions is to do work and then modify the value of <code>data.response</code>, which will eventually be sent down to the client.</p>
 				<p>You can also modify properties of the connection by accessing <code>data.connection</code>, IE changing the response header for a HTTP request.</p>

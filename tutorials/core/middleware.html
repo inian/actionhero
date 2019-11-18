@@ -99,53 +99,82 @@
 				</a>
 				<p><img src="connection_flow_actions.png" alt=""></p>
 				<pre><code class="language-js"><span class="hljs-keyword">const</span> middleware = {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">'userId checker'</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"userId checker"</span>,
   <span class="hljs-attr">global</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">priority</span>: <span class="hljs-number">1000</span>,
-  <span class="hljs-attr">preProcessor</span>: <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
-    <span class="hljs-keyword">if</span>(!data.params.userId){
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'All actions require a userId'</span>)
+  <span class="hljs-attr">preProcessor</span>: <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!data.params.userId) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"All actions require a userId"</span>);
     }
   },
-  <span class="hljs-attr">postProcessor</span>: <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
-    <span class="hljs-keyword">if</span>(data.thing.stuff == <span class="hljs-literal">false</span>){ data.toRender = <span class="hljs-literal">false</span> }
+  <span class="hljs-attr">postProcessor</span>: <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (data.thing.stuff == <span class="hljs-literal">false</span>) {
+      data.toRender = <span class="hljs-literal">false</span>;
+    }
   }
-}
+};
 
-api.actions.addMiddleware(middleware)</code></pre>
+api.actions.addMiddleware(middleware);</code></pre>
 				<p>ActionHero provides hooks for you to execute custom code both before and after the execution of all or some actions. This is a great place to write authentication logic or custom loggers.</p>
 				<p>Action middleware requires a <code>name</code> and at least one of <code>preProcessor</code> or <code>postProcessor</code>. Middleware can be <code>global</code>, or you can choose to apply each middleware to an action specifically via <code>action.middleware = []</code> in the action&#39;s definition. You supply a list of middleware names, like <code>action.middleware = [&#39;userId checker&#39;]</code> in the example above.</p>
-				<p>Each processor is passed <code>data</code>. Just like within actions, you can modify the <code>data</code> object to add to <code>data.response</code> to create a response to the client. If an error is thrown, the action will not execute, and <code>data.response.error</code> will contain the error.  If a <code>preProcessor</code> has an error, the action will never be called.</p>
-				<p>The priority of a middleware orders it with all other middleware which might fire for an action. All global middleware happen before locally defined middleware on an action.  Lower numbers happen first. If you do not provide a priority, the default from <code>api.config.general.defaultProcessorPriority</code> will be used.</p>
+				<p>Each processor is passed <code>data</code>. Just like within actions, you can modify the <code>data</code> object to add to <code>data.response</code> to create a response to the client. If an error is thrown, the action will not execute, and <code>data.response.error</code> will contain the error. If a <code>preProcessor</code> has an error, the action will never be called.</p>
+				<p>The priority of a middleware orders it with all other middleware which might fire for an action. All global middleware happen before locally defined middleware on an action. Lower numbers happen first. If you do not provide a priority, the default from <code>api.config.general.defaultProcessorPriority</code> will be used.</p>
 				<a href="#the-data-object" id="the-data-object" style="color: inherit; text-decoration: none;">
 					<h3>The Data Object</h3>
 				</a>
 				<p><code>data</code> contains the same information as would be passed to an action:</p>
 				<pre><code class="language-js">data = {
   <span class="hljs-attr">connection</span>: {},
-  <span class="hljs-attr">action</span>: <span class="hljs-string">'randomNumber'</span>,
+  <span class="hljs-attr">action</span>: <span class="hljs-string">"randomNumber"</span>,
   <span class="hljs-attr">toRender</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">messageId</span>: <span class="hljs-number">1</span>,
-  <span class="hljs-attr">params</span>: { <span class="hljs-attr">action</span>: <span class="hljs-string">'randomNumber'</span>, <span class="hljs-attr">apiVersion</span>: <span class="hljs-number">1</span> },
+  <span class="hljs-attr">params</span>: { <span class="hljs-attr">action</span>: <span class="hljs-string">"randomNumber"</span>, <span class="hljs-attr">apiVersion</span>: <span class="hljs-number">1</span> },
   <span class="hljs-attr">actionStartTime</span>: <span class="hljs-number">1429531553417</span>,
   <span class="hljs-attr">actionTemplate</span>: {}, <span class="hljs-comment">// the actual object action definition</span>
   <span class="hljs-attr">response</span>: {},
-}</code></pre>
+  <span class="hljs-attr">session</span>: {}
+};</code></pre>
+				<p>If your middleware wants to pass information about the connection to the action, place that data withinin the <code>session</code> object. For example, you might have a middleware that sets <code>session.user</code> for use in your actions:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">const</span> authenticatedUserMiddleware = {
+  name: <span class="hljs-string">"authenticated-team-member"</span>,
+  global: <span class="hljs-literal">false</span>,
+  priority: <span class="hljs-number">1000</span>,
+  preProcessor: <span class="hljs-keyword">async</span> data =&gt; {
+    <span class="hljs-keyword">const</span> { Team, TeamMember } = api.models;
+    <span class="hljs-keyword">const</span> sessionData = <span class="hljs-keyword">await</span> api.session.load(data.connection);
+    <span class="hljs-keyword">if</span> (!sessionData) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Please log in to continue"</span>);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (
+      !data.params.csrfToken ||
+      data.params.csrfToken !== sessionData.csrfToken
+    ) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"CSRF error"</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">const</span> teamMember = <span class="hljs-keyword">await</span> TeamMember.findOne({
+        where: { guid: sessionData.guid },
+        include: Team
+      });
+      data.session = { data: sessionData, teamMember };
+    }
+  }
+};
+
+api.actions.addMiddleware(authenticatedUserMiddleware);</code></pre>
 				<a href="#connection-middleware" id="connection-middleware" style="color: inherit; text-decoration: none;">
 					<h2>Connection Middleware</h2>
 				</a>
 				<pre><code class="language-js"><span class="hljs-keyword">const</span> connectionMiddleware = {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">'connection middleware'</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"connection middleware"</span>,
   <span class="hljs-attr">priority</span>: <span class="hljs-number">1000</span>,
-  <span class="hljs-attr">create</span>: <span class="hljs-keyword">async</span> (connection) =&gt; {
-    api.log(<span class="hljs-string">'connection joined'</span>)
+  <span class="hljs-attr">create</span>: <span class="hljs-keyword">async</span> connection =&gt; {
+    api.log(<span class="hljs-string">"connection joined"</span>);
   },
-  <span class="hljs-attr">destroy</span>: <span class="hljs-keyword">async</span> (connection) =&gt; {
-    api.log(<span class="hljs-string">'connection left'</span>)
+  <span class="hljs-attr">destroy</span>: <span class="hljs-keyword">async</span> connection =&gt; {
+    api.log(<span class="hljs-string">"connection left"</span>);
   }
 };
 
-api.connections.addMiddleware(connectionMiddleware)</code></pre>
+api.connections.addMiddleware(connectionMiddleware);</code></pre>
 				<p>Like the action middleware above, you can also create middleware to react to the creation or destruction of all connections.</p>
 				<p>Keep in mind that some connections persist (webSocket, socket) and some only exist for the duration of a single request (web). You will likely want to inspect <code>connection.type</code> in this middleware. Again, if you do not provide a priority, the default from <code>api.config.general.defaultMiddlewarePriority</code> will be used.</p>
 				<p>Any modification made to the connection at this stage may happen either before or after an action, and may or may not persist to the connection depending on how the server is implemented.</p>
