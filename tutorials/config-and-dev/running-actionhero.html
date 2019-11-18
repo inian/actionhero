@@ -1,0 +1,448 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Running Actionhero | actionhero</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../assets/js/search.js" data-base="../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../index.html" class="title">actionhero</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+			</ul>
+			<h1> Running Actionhero</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><img src="ops-tools.svg" alt=""></p>
+				<a href="#the-actionhero-binary" id="the-actionhero-binary" style="color: inherit; text-decoration: none;">
+					<h2>The ActionHero Binary</h2>
+				</a>
+				<p>The suggested method to run your ActionHero server is to use the included <code>./node_modules/.bin/actionhero</code> binary. Note that there is no <code>main.js</code> or specific start script your project needs. ActionHero handles this for you. Your ActionHero project simply needs to follow the proper directory conventions and it will be bootable.</p>
+				<p>The help for this binary is as follows:</p>
+				<pre><code>--------------------------------------
+ACTIONHERO COMMAND &gt;&gt; help
+--------------------------------------
+ActionHero - A multi-transport node<span class="hljs-variable">.js</span> API Server <span class="hljs-keyword">with</span> integrated cluster capabilities <span class="hljs-keyword">and</span> delayed tasks
+
+Binary options:
+
+* actions list
+* console
+* <span class="hljs-keyword">generate</span>
+* <span class="hljs-keyword">generate</span> action
+* <span class="hljs-keyword">generate</span> cli
+* <span class="hljs-keyword">generate</span> initializer
+* <span class="hljs-keyword">generate</span> plugin
+* <span class="hljs-keyword">generate</span> server
+* <span class="hljs-keyword">generate</span> <span class="hljs-keyword">task</span>
+* help
+* start
+* start cluster
+* <span class="hljs-keyword">task</span> enqueue
+* version
+
+Descriptions:
+
+* actions list
+  description: I will list the actions defined on <span class="hljs-keyword">this</span> server
+
+* console
+  description: start an interactive REPL session <span class="hljs-keyword">with</span> the api object in-scope
+
+* <span class="hljs-keyword">generate</span>
+  description: will prepare an empty directory <span class="hljs-keyword">with</span> a template ActionHero project
+
+* <span class="hljs-keyword">generate</span> action
+  description: <span class="hljs-keyword">generate</span> a <span class="hljs-keyword">new</span> action
+  example: actionhero <span class="hljs-keyword">generate</span> action --name=[name] --description=[description]
+  inputs:
+    [name]
+    [description]
+      <span class="hljs-keyword">default</span>: an actionhero action
+
+* <span class="hljs-keyword">generate</span> cli
+  description: <span class="hljs-keyword">generate</span> a <span class="hljs-keyword">new</span> cli command
+  example: actionhero <span class="hljs-keyword">generate</span> cli --name=[name]
+  inputs:
+    [name]
+    [description] (optional)
+      <span class="hljs-keyword">default</span>: an actionhero cli command
+    [example] (optional)
+      <span class="hljs-keyword">default</span>: actionhero command --option=yes
+
+* <span class="hljs-keyword">generate</span> initializer
+  description: <span class="hljs-keyword">generate</span> a <span class="hljs-keyword">new</span> initializer
+  example: actionhero <span class="hljs-keyword">generate</span> initializer --name=[name] --loadPriority=[p] --startPriority=[p] --stopPriority=[p]
+  inputs:
+    [name]
+    [loadPriority]
+      <span class="hljs-keyword">default</span>: <span class="hljs-number">1000</span>
+    [startPriority]
+      <span class="hljs-keyword">default</span>: <span class="hljs-number">1000</span>
+    [stopPriority]
+      <span class="hljs-keyword">default</span>: <span class="hljs-number">1000</span>
+
+* <span class="hljs-keyword">generate</span> plugin
+  description: <span class="hljs-keyword">generate</span> the structure of a <span class="hljs-keyword">new</span> actionhero plugin in an empty directory
+  example: actionhero <span class="hljs-keyword">generate</span> plugin
+
+* <span class="hljs-keyword">generate</span> server
+  description: <span class="hljs-keyword">generate</span> a <span class="hljs-keyword">new</span> server
+  example: actionhero <span class="hljs-keyword">generate</span> server --name=[name]
+  inputs:
+    [name]
+
+* <span class="hljs-keyword">generate</span> <span class="hljs-keyword">task</span>
+  description: <span class="hljs-keyword">generate</span> a <span class="hljs-keyword">new</span> <span class="hljs-keyword">task</span>
+  example: actionhero <span class="hljs-keyword">generate</span> <span class="hljs-keyword">task</span> --name=[name] --description=[description] --scope=[scope] --frequency=[frequency]
+  inputs:
+    [name]
+    [queue]
+    [description]
+      <span class="hljs-keyword">default</span>: an actionhero <span class="hljs-keyword">task</span>
+    [frequency]
+
+* help
+  description: get actonhero CLI help; will display <span class="hljs-keyword">this</span> document
+
+* start
+  description: start <span class="hljs-keyword">this</span> ActionHero server
+  example: actionhero start --<span class="hljs-keyword">config</span>=[/path/to/<span class="hljs-keyword">config</span>] --title=[processTitle] --daemon
+  inputs:
+    [<span class="hljs-keyword">config</span>] (optional)
+      note: path to <span class="hljs-keyword">config</span><span class="hljs-variable">.js</span>, defaults to <span class="hljs-string">"process.cwd()"</span> + '/' + <span class="hljs-keyword">config</span><span class="hljs-variable">.js</span>. You can also <span class="hljs-keyword">use</span> ENV[ACTIONHERO_CONFIG]
+    [title] (optional)
+      note: process title to <span class="hljs-keyword">use</span> <span class="hljs-keyword">for</span> ActionHero\'s ID, ps, log, <span class="hljs-keyword">and</span> pidFile defaults. Must be <span class="hljs-keyword">unique</span> <span class="hljs-keyword">for</span> each member of the cluster. You can also <span class="hljs-keyword">use</span> ENV[ACTIONHERO_TITLE]. Process renaming does <span class="hljs-keyword">not</span> work on OSX/Windows
+    [daemon] (optional)
+      note: to <span class="hljs-keyword">fork</span> <span class="hljs-keyword">and</span> run as a <span class="hljs-keyword">new</span> background process defaults to false
+
+* start cluster
+  description: start an actionhero cluster
+  example: actionhero start cluster --workers=[numWorkers] --workerTitlePrefix=[title] --daemon
+  inputs:
+    [workers]
+      note: number of workers (defaults to # CPUs)
+      <span class="hljs-keyword">default</span>: <span class="hljs-number">8</span>
+    [title] (optional)
+      note: worker title prefix (<span class="hljs-keyword">default</span> 'actionhero-worker-') set <span class="hljs-meta">`--workerTitlePrefix=hostname`, your app.id would be like your_host_name-#</span>
+    [workerTitlePrefix]
+      <span class="hljs-keyword">default</span>: actionhero-worker-
+    [daemon] (optional)
+      note: to <span class="hljs-keyword">fork</span> <span class="hljs-keyword">and</span> run as a <span class="hljs-keyword">new</span> background process defaults to false
+    [silent] (optional)
+
+* <span class="hljs-keyword">task</span> enqueue
+  description: enqueue a defined <span class="hljs-keyword">task</span> into your actionhero cluster
+  example: actionhero <span class="hljs-keyword">task</span> enqueue --name=[taskName] --args=[JSON-formatted args]
+  inputs:
+    [name]
+    [args] (optional)
+    [params] (optional)
+
+* version
+  description: <span class="hljs-keyword">return</span> the ActionHero version <span class="hljs-keyword">within</span> <span class="hljs-keyword">this</span> project</code></pre>
+				<a href="#linking-the-actionhero-binary" id="linking-the-actionhero-binary" style="color: inherit; text-decoration: none;">
+					<h2>Linking the ActionHero Binary</h2>
+				</a>
+				<p>ActionHero is not designed to function when installed globally. Do not install ActionHero globally, using <code>npm install -g</code>. Modern versions of NPM (v5+) allow you to also use the <code>npx</code> command, ie: <code>npx actionhero start cluster --workers=2</code>, which is a simple way to get to the ActionHero binary from the top-level of your project. Otherwise defining <code>scripts</code> referencing actionhero in your <code>package.json</code> is the best way to run ActionHero:</p>
+				<pre><code class="language-js">{
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"my ActionHero project"</span>,
+  <span class="hljs-string">"scripts"</span>: {
+    <span class="hljs-string">"start"</span> : <span class="hljs-string">"actionhero start"</span>,
+    <span class="hljs-string">"dev"</span> : <span class="hljs-string">"ts-node ./node_modules/.bin actionhero start"</span>,
+    <span class="hljs-string">"pretest"</span>: <span class="hljs-string">"prettier"</span>,
+    <span class="hljs-string">"test"</span> : <span class="hljs-string">"jest"</span>
+  }
+}
+</code></pre>
+				<a href="#environments-and-config" id="environments-and-config" style="color: inherit; text-decoration: none;">
+					<h2>Environments and Config</h2>
+				</a>
+				<p>By default, ActionHero will use the settings found in the <code>exports.default</code> blocks in <code>/config/</code>. However, you can set environment-specific overrides or changes. ActionHero inspects <code>process.env.NODE_ENV</code> to load up runtime configuration overrides from <code>exports.#{env}</code> blocks in your configuration files. This is the recommended way to have separate settings for staging and production.</p>
+				<p>The load order of configs is:</p>
+				<ul>
+					<li>default values in <code>/config</code></li>
+					<li>environment-specific values in <code>/config</code></li>
+					<li>options passed in to boot with <code>actionhero.start({configChanges: configChanges})</code></li>
+				</ul>
+				<p>You can <code>{configChanges: {}}</code> to a new ActionHero.Process&#39; <code>start</code> or <code>initialize</code> methods. This can be helpful when creating tests. When using CLI commands, you can also set <code>process.env.configChanges</code> or pass <code>--configChanges</code> on the command line. In these cases, <code>configChanges</code> should be stringified JSON.</p>
+				<pre><code class="language-js"><span class="hljs-comment">// from ./config/namespace.js</span>
+exports[<span class="hljs-string">"default"</span>] = {
+  <span class="hljs-attr">namespace</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">api</span>) </span>{
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">safe</span>: <span class="hljs-literal">false</span>
+    };
+  }
+};
+
+exports.production = {
+  <span class="hljs-attr">namespace</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">api</span>) </span>{
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">safe</span>: <span class="hljs-literal">true</span>
+    };
+  }
+};</code></pre>
+				<p>In the example above, we are defining <code>api.config.namespace.enabled</code> and <code>api.config.namespace.safe</code>. In all environments (NODE_ENV) <code>api.config.namespace.enabled = true</code> Only in production would <code>api.config.namespace.safe = true</code>, it is <code>false</code> everywhere else.</p>
+				<a href="#programatic-use-of-actionhero" id="programatic-use-of-actionhero" style="color: inherit; text-decoration: none;">
+					<h2>Programatic Use of ActionHero</h2>
+				</a>
+				<p>While <strong>NOT</strong> encouraged, you can always instantiate an ActionHero process yourself. Perhaps you wish to combine ActionHero with an existing project. Here is how! Take note that using these methods will not work for a cluster process, and only a single instance will be started within your project.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Process } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"actionhero"</span>);
+<span class="hljs-keyword">const</span> actionhero = <span class="hljs-keyword">new</span> Process();
+
+<span class="hljs-keyword">const</span> sleep = <span class="hljs-function"><span class="hljs-params">time</span> =&gt;</span> {
+  <span class="hljs-keyword">if</span> (!time) {
+    time = <span class="hljs-number">5000</span>;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> {
+    setTimeout(resolve, time);
+  });
+};
+
+<span class="hljs-keyword">const</span> api = <span class="hljs-keyword">await</span> actionhero.start({ configChanges });
+
+api.log(<span class="hljs-string">" &gt;&gt; Boot Successful!"</span>);
+<span class="hljs-keyword">await</span> sleep();
+
+api.log(<span class="hljs-string">" &gt;&gt; restarting server..."</span>);
+<span class="hljs-keyword">await</span> actionhero.restart();
+api.log(<span class="hljs-string">" &gt;&gt; Restarted!"</span>);
+<span class="hljs-keyword">await</span> sleep();
+
+api.log(<span class="hljs-string">" &gt;&gt; stopping server..."</span>);
+<span class="hljs-keyword">await</span> actionhero.stop();
+api.log(<span class="hljs-string">" &gt;&gt; Stopped!"</span>);
+process.exit();</code></pre>
+				<p>Feel free to look at the source of <code>./node_modules/actionhero/bin/methods/start</code> to see how the main ActionHero server is implemented for more information.</p>
+				<p>You can programmatically control an ActionHero server with <code>actionhero.start(params)</code>, <code>actionhero.stop()</code> and <code>actionhero.restart()</code></p>
+				<p>From within ActionHero itself (actions, initializers, etc), you can use <code>api.commands.start</code>, <code>api.commands.stop</code>, and <code>api.commands.restart</code> to control the server.</p>
+				<a href="#signals" id="signals" style="color: inherit; text-decoration: none;">
+					<h2>Signals</h2>
+				</a>
+				<pre><code class="language-bash">&gt; npx actionhero start cluster --workers=2
+info: actionhero &gt;&gt; start cluster
+notice:  - STARTING CLUSTER -
+notice: pid: 41382
+info: starting worker <span class="hljs-comment">#1</span>
+info: worker 41383 (<span class="hljs-comment">#1) has spawned</span>
+info: Worker <span class="hljs-comment">#1 [41383]: starting</span>
+info: Worker <span class="hljs-comment">#1 [41383]: started</span>
+info: starting worker <span class="hljs-comment">#2</span>
+info: worker 41384 (<span class="hljs-comment">#2) has spawned</span>
+info: Worker <span class="hljs-comment">#2 [41384]: starting</span>
+info: Worker <span class="hljs-comment">#2 [41384]: started</span>
+
+<span class="hljs-comment"># A new terminal</span>
+<span class="hljs-built_in">kill</span> -s TTIN \`cat pids/cluster_pidfile\`
+
+info: worker 41632 (<span class="hljs-comment">#3) has spawned</span>
+info: Worker <span class="hljs-comment">#3 [41632]: starting</span>
+info: Worker <span class="hljs-comment">#3 [41632]: started</span>
+
+<span class="hljs-comment"># A new terminal</span>
+<span class="hljs-built_in">kill</span> -s KILL \`cat pids/cluster_pidfile\`
+
+warning: Cluster manager quitting
+info: Stopping each worker...
+info: Worker <span class="hljs-comment">#1 [41901]: stopping</span>
+info: Worker <span class="hljs-comment">#2 [41904]: stopping</span>
+info: Worker <span class="hljs-comment">#3 [41906]: stopping</span>
+info: Worker <span class="hljs-comment">#3 [41906]: stopped</span>
+info: Worker <span class="hljs-comment">#2 [41904]: stopped</span>
+info: Worker <span class="hljs-comment">#1 [41901]: stopped</span>
+alert: worker 41901 (<span class="hljs-comment">#1) has exited</span>
+alert: worker 41904 (<span class="hljs-comment">#2) has exited</span>
+alert: worker 41906 (<span class="hljs-comment">#3) has exited</span>
+info: all workers gone
+notice: cluster complete, Bye!</code></pre>
+				<p>ActionHero is intended to be run on <code>*nix</code> operating systems. The <code>start</code> and <code>start cluster</code> commands provide support for signaling. (There is limited support for some of these commands in windows).</p>
+				<p><strong>actionhero start</strong></p>
+				<ul>
+					<li><code>kill</code> / <code>term</code> / <code>int</code> : Process will attempt to &quot;gracefully&quot; shut down. That is, the worker will close all server connections (possibly sending a shutdown message to clients, depending on server type), stop all task workers, and eventually shut down. This action may take some time to fully complete.</li>
+					<li><code>USR2</code>: Process will restart itself. The process will preform the &quot;graceful shutdown&quot; above, and they restart.</li>
+				</ul>
+				<p><strong>actionhero start cluster</strong></p>
+				<p>All signals should be sent to the cluster master process. You can still signal the termination of a worker, but the cluster manager will start a new one in its place.</p>
+				<ul>
+					<li><code>kill</code> / <code>term</code> / <code>int</code>: Will signal the master to &quot;gracefully terminate&quot; all workers. Master will terminate once all workers have completed</li>
+					<li><code>HUP</code> : Restart all workers.</li>
+					<li><code>USR2</code> : &quot;Hot reload&quot;. Worker will kill off existing workers one-by-one, and start a new worker in their place. This is used for 0-downtime restarts. Keep in mind that for a short while, your server will be running both old and new code while the workers are rolling.</li>
+					<li><code>TTOU</code>: remove one worker</li>
+					<li><code>TTIN</code>: add one worker</li>
+				</ul>
+				<a href="#shutting-down" id="shutting-down" style="color: inherit; text-decoration: none;">
+					<h2>Shutting Down</h2>
+				</a>
+				<p>When using <code>actionhero start</code> or <code>actionhero start cluster</code>, when you signal ActionHero to stop via the signals above (or from within your running application via <code>api.commands.stop()</code>), actionhero will attempt to gracefully shutdown. This will include running any initializer&#39;s <code>stop()</code> method. This will close any open servers, and attempt to allow any running tasks to complete.</p>
+				<p>Because things sometimes go wrong, <code>actionhero start</code> and <code>actionhero start cluster</code> also have a &quot;emergency stop&quot; timeout. This defaults to 30 seconds, and is configurable via the <code>ACTIONHERO_SHUTDOWN_TIMEOUT</code> environment variable. Be sure that your tasks and actions can complete within that window, or else raise that shutdown limit.</p>
+				<a href="#windows-specific-notes" id="windows-specific-notes" style="color: inherit; text-decoration: none;">
+					<h2>Windows Specific Notes</h2>
+				</a>
+				<ul>
+					<li>Sometimes ActionHero may require a git-based module (rather than a NPM module). You will need to have git installed. Depending on how you installed git, it may not be available to the node shell. Be sure to have also installed references to git. You can also run node/npm install from the git shell.* Sometimes, npm will not install the actionhero binary @ <code>/node_modules/.bin/actionhero</code>, but rather it will attempt to create a windows executable and wrapper. You can launch ActionHero directly with <code>./node_modules/actionhero/bin/actionhero</code></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current ">
+						<a href="../index.html">Tutorial index</a>
+						<ul>
+							<li class=" ">
+								<a href="../core/index.html">Actionhero <wbr>Core <wbr>Features</a>
+							</li>
+							<li class="current ">
+								<a href="index.html">Configuration and <wbr>Development</a>
+								<ul>
+									<li class="current ">
+										<a href="running-actionhero.html">Running <wbr>Actionhero</a>
+									</li>
+									<li class=" ">
+										<a href="config.html">Config</a>
+									</li>
+									<li class=" ">
+										<a href="development-mode.html">Development <wbr>Mode</a>
+									</li>
+									<li class=" ">
+										<a href="file-server.html">File <wbr>Server</a>
+									</li>
+									<li class=" ">
+										<a href="logging.html">Logging</a>
+									</li>
+								</ul>
+							</li>
+							<li class=" ">
+								<a href="../advanced/index.html">Advanced <wbr>Actionhero <wbr>Topics</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

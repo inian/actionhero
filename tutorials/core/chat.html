@@ -1,0 +1,232 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Chat | actionhero</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../assets/js/search.js" data-base="../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../index.html" class="title">actionhero</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+			</ul>
+			<h1> Chat</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><img src="chat.svg" alt=""></p>
+				<a href="#general" id="general" style="color: inherit; text-decoration: none;">
+					<h2>General</h2>
+				</a>
+				<p>ActionHero ships with a chat framework which may be used by all persistent connections (<code>socket</code> and <code>websocket</code>). There are methods to create and manage chat rooms and control the users in those rooms. Chat does not have to be for peer-to-peer communication, and is a metaphor used for many things, including the sharing of all realtime data between client and server, and client to client.  This can be used for games, syndication, etc.</p>
+				<p>Clients themselves interact with rooms via <code>verbs</code>. Verbs are short-form commands that will attempt to modify the connection&#39;s state, either joining or leaving a room. Clients can be in many rooms at once.</p>
+				<p>Relevant chat verbs are:</p>
+				<ul>
+					<li><code>roomAdd</code></li>
+					<li><code>roomLeave</code></li>
+					<li><code>roomView</code></li>
+					<li><code>say</code></li>
+				</ul>
+				<p>The special verb for persistent connections <code>say</code> makes use of <code>api.chatRoom.broadcast</code> to tell a message to all other users in the room, IE: <code>say myRoom Hello World</code> from a socket client or <code>client.say(&quot;myRoom&quot;, &#39;Hello World&quot;)</code> for a websocket.</p>
+				<p>Chat on multiple actionHero nodes relies on redis for both chat (pub/sub) and a key store defined by <code>api.config.redis</code>. The redis pub/sub server and the key store don&#39;t need to be the same instance of redis, but they do need to be the same for all ActionHero servers you are running in the cluster. This is how ActionHero scales the chat features.</p>
+				<p>There is no limit to the number of rooms which can be created, but keep in mind that each room stores information in redis, and there load created for each connection.</p>
+				<a href="#middleware" id="middleware" style="color: inherit; text-decoration: none;">
+					<h2>Middleware</h2>
+				</a>
+				<p>There are 4 types of middleware you can install for the chat system: <code>say</code>, <code>onSayReceive</code>, <code>join</code>, and <code>leave</code>. You can learn more about <a href="tutorial-middleware.html">chat middleware in the middleware section of this site</a>.  Using middleware when messages are sent or when connections join rooms is how you build up authentication and more complex workflows.</p>
+				<a href="#specific-client-communication" id="specific-client-communication" style="color: inherit; text-decoration: none;">
+					<h2>Specific Client Communication</h2>
+				</a>
+				<p>Every connection object also has a <code>connection.sendMessage(message)</code> method which you can call directly from the server.</p>
+				<a href="#client-use" id="client-use" style="color: inherit; text-decoration: none;">
+					<h2>Client Use</h2>
+				</a>
+				<p>The details of communicating within a chat room are up to each individual server (see <a href="tutorial-websocket-server.html">websocket</a> or <a href="tutorial-socket-server.html">socket</a>), but the same principals apply:</p>
+				<ul>
+					<li>Client will join a room (<code>client.roomAdd(room)</code>).</li>
+					<li>Once in the room, clients can send messages (which are strings) to everyone else in the room via <code>say</code>, ie: <code>{</code>client.say(&#39;room&#39;, Hello World&#39;)<code>}</code></li>
+					<li>Once a client is in a room, they will revive messages from other members of the room as events. For example, catching say events from the websocket client looks like <code>{</code>client.on(&#39;say&#39;, function(message){ console.log(message); })<code>}</code>. You can inspect <code>message.room</code> if you are in more than one room.<ul>
+							<li>The payload of a message will contain the room, sender, and the message body: <code>{</code>{message: &quot;Hello World&quot;, room: &quot;SecretRoom&quot;, from: &quot;7d419af9-accf-40ac-8d78-9281591dd59e&quot;, context: &quot;user&quot;, sentAt: 1399437579346}<code>}</code></li>
+						</ul>
+					</li>
+				</ul>
+				<p>If you want to create an authenticated room, there are 2 steps:</p>
+				<ul>
+					<li>First, create an action which modifies some property either on the connection object it self, or stores permissions to a database.</li>
+					<li>Then, create a <code>join</code>-style middleware which checks these values.  In this middleware, you can determine if the connection should be added to the room or not.</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current ">
+						<a href="../index.html">Tutorial index</a>
+						<ul>
+							<li class="current ">
+								<a href="index.html">Actionhero <wbr>Core <wbr>Features</a>
+								<ul>
+									<li class=" ">
+										<a href="actions.html">Actions</a>
+									</li>
+									<li class=" ">
+										<a href="tasks.html">Tasks</a>
+									</li>
+									<li class=" ">
+										<a href="initializers.html">Initializers</a>
+									</li>
+									<li class=" ">
+										<a href="localization.html">Localization</a>
+									</li>
+									<li class=" ">
+										<a href="middleware.html">Middleware</a>
+									</li>
+									<li class=" ">
+										<a href="testing.html">Testing</a>
+									</li>
+									<li class="current ">
+										<a href="chat.html">Chat</a>
+									</li>
+									<li class=" ">
+										<a href="servers/index.html">Servers</a>
+									</li>
+									<li class=" ">
+										<a href="cli.html">Cli</a>
+									</li>
+								</ul>
+							</li>
+							<li class=" ">
+								<a href="../config-and-dev/index.html">Configuration and <wbr>Development</a>
+							</li>
+							<li class=" ">
+								<a href="../advanced/index.html">Advanced <wbr>Actionhero <wbr>Topics</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

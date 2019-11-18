@@ -1,0 +1,311 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Websocket Server | actionhero</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../../assets/js/search.js" data-base="../../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../../index.html" class="title">actionhero</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+			</ul>
+			<h1> Websocket Server</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><img src="documentation.svg" alt=""></p>
+				<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
+					<h2>Overview</h2>
+				</a>
+				<p>ActionHero uses <a href="https://github.com/primus/primus">Primus</a> for web socket connections. The Primus project allows you to choose from many websocket backends, including <code>ws</code>, <code>engine.io</code>, <code>socket.io</code>, and more. Within ActionHero, web sockets are bound to the web server (either http or https).</p>
+				<p>ActionHero will generate the client-side javascript needed for you (based on the ActionheroWebsocketClient library, primus, and the underlying ws transport). This file is regenerated each time you boot the application.</p>
+				<a href="#connection-details" id="connection-details" style="color: inherit; text-decoration: none;">
+					<h2>Connection Details</h2>
+				</a>
+				<pre><code class="language-html">// In the Browser...
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/public/javascript/ActionheroWebsocketClient.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+
+  client = <span class="hljs-keyword">new</span> ActionheroWebsocketClient();
+
+  client.on(<span class="hljs-string">'connected'</span>,    <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{ <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'connected!'</span>) })
+  client.on(<span class="hljs-string">'disconnected'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{ <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'disconnected :('</span>) })
+
+  client.on(<span class="hljs-string">'error'</span>,        <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>)</span>{ <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'error'</span>, error.stack) })
+  client.on(<span class="hljs-string">'reconnect'</span>,    <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{ <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'reconnect'</span>) })
+  client.on(<span class="hljs-string">'reconnecting'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{ <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'reconnecting'</span>) })
+
+  <span class="hljs-comment">// this will log all messages send the client</span>
+  <span class="hljs-comment">// client.on('message',      function(message){ console.log(message) })</span>
+
+  client.on(<span class="hljs-string">'alert'</span>,        <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>)</span>{ alert(message) })
+  client.on(<span class="hljs-string">'api'</span>,          <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>)</span>{ alert(message) })
+
+  client.on(<span class="hljs-string">'welcome'</span>,      <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>)</span>{ appendMessage(message); })
+  client.on(<span class="hljs-string">'say'</span>,          <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>)</span>{ appendMessage(message); })
+
+  client.connect(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, details</span>)</span>{
+    <span class="hljs-keyword">if</span>(error != <span class="hljs-literal">null</span>){
+      <span class="hljs-built_in">console</span>.log(error);
+    }<span class="hljs-keyword">else</span>{
+      client.roomAdd(<span class="hljs-string">"defaultRoom"</span>);
+      client.action(<span class="hljs-string">'someAction'</span>, {<span class="hljs-attr">key</span>: <span class="hljs-string">'k'</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'v'</span>}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, data</span>)</span>{
+        <span class="hljs-comment">// do stuff</span>
+      });
+    }
+  });
+
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<p><code>connection.type</code> for a webSocket client is &quot;websocket&quot;. This type will not change regardless of if the client has fallen back to another protocol.</p>
+				<p>Data is always returned as JSON objects to the webSocket client.</p>
+				<p>An example web socket session might be the following:</p>
+				<p>You can also inspect <code>client.state</code> (‘connected&#39;, ‘disconnected&#39;, etc). The websocket client will attempt to re-connect automatically.</p>
+				<p>If you want to communicate with a websocket client outside of an action, you can call <code>connection.send(message)</code> on the server. In the client lib, the event message will be fired. So, client.on(&#39;message, function(m){ ... })<code>. Be sure to add some descriptive content to the message you send from the sever (like perhaps {&quot;type&quot;: &#39;message type&#39;}</code>) so you can route message types on the client.</p>
+				<a href="#client-methods" id="client-methods" style="color: inherit; text-decoration: none;">
+					<h2>Client Methods</h2>
+				</a>
+				<p>The clent API can be viewed here: <a href="ActionHero.ActionheroWebsocketClient.html">WebSocket Client API</a></p>
+				<a href="#linking-websockets-to-web-clients" id="linking-websockets-to-web-clients" style="color: inherit; text-decoration: none;">
+					<h2>Linking WebSockets to Web Clients</h2>
+				</a>
+				<p>ActionHero provides <code>connection.fingerprint</code> where available to help you link websocket connections to related web connections. While every connection will always have a unique <code>connection.id</code>, we attempt to build <code>connection.fingerprint</code> by checking the headers the websocket connection began with. If the cookie defined by <code>api.config.servers.web.fingerprint.cookieKey</code> is present, we will store its value on the websocket connection.</p>
+				<p>You can read more about using a value like <code>connection.fingerprint</code> in an <a href="tutorial-middleware.html">authentication middleware</a> or using it as a key for session information.</p>
+				<a href="#config-options" id="config-options" style="color: inherit; text-decoration: none;">
+					<h2>Config Options</h2>
+				</a>
+				<pre><code class="language-js">exports[<span class="hljs-string">'default'</span>] = {
+  <span class="hljs-attr">servers</span>: {
+    <span class="hljs-attr">websocket</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">api</span>) </span>{
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-comment">// you can pass a FQDN (string) here or 'window.location.origin'</span>
+        <span class="hljs-attr">clientUrl</span>: <span class="hljs-string">'window.location.origin'</span>,
+        <span class="hljs-comment">// Directory to render client-side JS.</span>
+        <span class="hljs-comment">// Path should start with "/" and will be built starting from api.config..general.paths.public</span>
+        <span class="hljs-attr">clientJsPath</span>: <span class="hljs-string">'javascript/'</span>,
+        <span class="hljs-comment">// the name of the client-side JS file to render.  Both \`.js\` and \`.min.js\` versions will be created</span>
+        <span class="hljs-comment">// do not include the file exension</span>
+        <span class="hljs-comment">// set to \`undefined\` to not render the client-side JS on boot</span>
+        <span class="hljs-attr">clientJsName</span>: <span class="hljs-string">'ActionheroWebsocketClient'</span>,
+        <span class="hljs-comment">// should the server signal clients to not reconnect when the server is shutdown/reboot</span>
+        <span class="hljs-attr">destroyClientsOnShutdown</span>: <span class="hljs-literal">false</span>,
+
+        <span class="hljs-comment">// websocket Server Options:</span>
+        <span class="hljs-attr">server</span>: {
+          <span class="hljs-comment">// authorization: null,</span>
+          <span class="hljs-comment">// pathname:      '/primus',</span>
+          <span class="hljs-comment">// parser:        'JSON',</span>
+          <span class="hljs-comment">// transformer:   'websockets',</span>
+          <span class="hljs-comment">// plugin:        {},</span>
+          <span class="hljs-comment">// timeout:       35000,</span>
+          <span class="hljs-comment">// origins:       '*',</span>
+          <span class="hljs-comment">// methods:       ['GET','HEAD','PUT','POST','DELETE','OPTIONS'],</span>
+          <span class="hljs-comment">// credentials:   true,</span>
+          <span class="hljs-comment">// maxAge:        '30 days',</span>
+          <span class="hljs-comment">// exposed:       false,</span>
+        },
+
+        <span class="hljs-comment">// websocket Client Options:</span>
+        <span class="hljs-attr">client</span>: {
+          <span class="hljs-attr">apiPath</span>: <span class="hljs-string">'/api'</span> <span class="hljs-comment">// the api base endpoint on your actionhero server</span>
+          <span class="hljs-comment">// reconnect:        {},</span>
+          <span class="hljs-comment">// timeout:          10000,</span>
+          <span class="hljs-comment">// ping:             25000,</span>
+          <span class="hljs-comment">// pong:             10000,</span>
+          <span class="hljs-comment">// strategy:         "online",</span>
+          <span class="hljs-comment">// manual:           false,</span>
+          <span class="hljs-comment">// websockets:       true,</span>
+          <span class="hljs-comment">// network:          true,</span>
+          <span class="hljs-comment">// transport:        {},</span>
+          <span class="hljs-comment">// queueSize:        Infinity,</span>
+        }
+      }
+    }
+  }
+}</code></pre>
+				<p>You can create your client with options. Options for both the server and client are stored in <code>/config/servers/websocket.js</code>. Note there are 2 sections: <code>server</code> and <code>client</code>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../../../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current ">
+						<a href="../../index.html">Tutorial index</a>
+						<ul>
+							<li class="current ">
+								<a href="../index.html">Actionhero <wbr>Core <wbr>Features</a>
+								<ul>
+									<li class=" ">
+										<a href="../actions.html">Actions</a>
+									</li>
+									<li class=" ">
+										<a href="../tasks.html">Tasks</a>
+									</li>
+									<li class=" ">
+										<a href="../initializers.html">Initializers</a>
+									</li>
+									<li class=" ">
+										<a href="../localization.html">Localization</a>
+									</li>
+									<li class=" ">
+										<a href="../middleware.html">Middleware</a>
+									</li>
+									<li class=" ">
+										<a href="../testing.html">Testing</a>
+									</li>
+									<li class=" ">
+										<a href="../chat.html">Chat</a>
+									</li>
+									<li class="current ">
+										<a href="index.html">Servers</a>
+										<ul>
+											<li class=" ">
+												<a href="web-server.html">Web <wbr>Server</a>
+											</li>
+											<li class="current ">
+												<a href="websocket-server.html">Websocket <wbr>Server</a>
+											</li>
+										</ul>
+									</li>
+									<li class=" ">
+										<a href="../cli.html">Cli</a>
+									</li>
+								</ul>
+							</li>
+							<li class=" ">
+								<a href="../../config-and-dev/index.html">Configuration and <wbr>Development</a>
+							</li>
+							<li class=" ">
+								<a href="../../advanced/index.html">Advanced <wbr>Actionhero <wbr>Topics</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../../../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../../../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

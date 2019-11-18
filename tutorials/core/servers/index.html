@@ -1,0 +1,392 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Servers | actionhero</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../../assets/js/search.js" data-base="../../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../../index.html" class="title">actionhero</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+			</ul>
+			<h1> Servers</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><img src="internet-of-things.svg" alt=""></p>
+				<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
+					<h2>Overview</h2>
+				</a>
+				<p>In ActionHero we have introduced a modular server system which allows you to create your own servers.  Servers should be thought of as any type of listener to remote connections, streams, or event your server.  </p>
+				<p>In ActionHero, the goal of each server is to ingest a specific type of connection and transform each client into a generic <code>connection</code> object which can be operated on by the rest of ActionHero.  To help with this, all servers extend <code>ActionHero.Server</code> and fill in the required methods.</p>
+				<p>To get started, you can use the <code>actionhero generate server --name=myServer</code>.  This will generate a template server which looks like the below.</p>
+				<p>Like initializers, the <code>start()</code> and <code>stop()</code> methods will be called when the server is to boot up in ActionHero&#39;s lifecycle, but before any clients are permitted into the system.  Here is where you should actually initialize your server (IE: <code>https.createServer.listen</code>, etc).</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> ActionHero = <span class="hljs-built_in">require</span>(<span class="hljs-string">'actionhero'</span>)
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyServer</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ActionHero</span>.<span class="hljs-title">Server</span> </span>{
+  <span class="hljs-keyword">constructor</span> () {
+    <span class="hljs-keyword">super</span>()
+    <span class="hljs-keyword">this</span>.type = <span class="hljs-string">'%%name%%'</span>
+
+    <span class="hljs-keyword">this</span>.attributes = {
+      <span class="hljs-attr">canChat</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">logConnections</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">logExits</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">sendWelcomeMessage</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">verbs</span>: []
+    }
+    <span class="hljs-comment">// this.config will be set to equal api.config.servers[this.type]</span>
+  }
+
+  initialize () {
+    <span class="hljs-keyword">this</span>.on(<span class="hljs-string">'connection'</span>, (conection) =&gt; {
+
+    })
+
+    <span class="hljs-keyword">this</span>.on(<span class="hljs-string">'actionComplete'</span>, (data) =&gt; {
+
+    })
+  }
+
+  start () {
+    <span class="hljs-comment">// this.buildConnection (data)</span>
+    <span class="hljs-comment">// this.processAction (connection)</span>
+    <span class="hljs-comment">// this.processFile (connection)</span>
+  }
+
+  stop () {
+
+  }
+
+  sendMessage (connection, message, messageId) {
+
+  }
+
+  sendFile (connection, error, fileStream, mime, length, lastModified) {
+
+  }
+
+  goodbye (connection) {
+
+  }
+}</code></pre>
+				<a href="#designing-servers" id="designing-servers" style="color: inherit; text-decoration: none;">
+					<h2>Designing Servers</h2>
+				</a>
+				<p>Your job, as a server designer, is to coerce every client&#39;s connection into a connection object.  This is done with the <code>sever.buildConnection</code> helper.  Here is an example from the <code>web</code> server:</p>
+				<pre><code class="language-js">server.buildConnection({
+  <span class="hljs-attr">rawConnection</span>: {
+    <span class="hljs-attr">req</span>: req,
+    <span class="hljs-attr">res</span>: res,
+    <span class="hljs-attr">method</span>: method,
+    <span class="hljs-attr">cookies</span>: cookies,
+    <span class="hljs-attr">responseHeaders</span>: responseHeaders,
+    <span class="hljs-attr">responseHttpCode</span>: responseHttpCode,
+    <span class="hljs-attr">parsedURL</span>: parsedURL
+  },
+  <span class="hljs-attr">id</span>: randomNumber(),
+  <span class="hljs-attr">remoteAddress</span>: remoteIP,
+  <span class="hljs-attr">remotePort</span>: req.connection.remotePort
+}) <span class="hljs-comment">// will emit "connection"</span>
+
+<span class="hljs-comment">// Note that connections will have a \`rawConnection\` property.  This is where you should store the actual object(s) returned by your server so that you can use them to communicate back with the client.  Again, an example from the \`web\` server:</span>
+
+server.sendMessage = <span class="hljs-function">(<span class="hljs-params">connection, message</span>) =&gt;</span> {
+  cleanHeaders(connection);
+  <span class="hljs-keyword">const</span> headers = connection.rawConnection.responseHeaders;
+  <span class="hljs-keyword">const</span> responseHttpCode = <span class="hljs-built_in">parseInt</span>(connection.rawConnection.responseHttpCode);
+  <span class="hljs-keyword">const</span> stringResponse = <span class="hljs-built_in">String</span>(message)
+  connection.rawConnection.res.writeHead(responseHttpCode, headers);
+  connection.rawConnection.res.end(stringResponse);
+  server.destroyConnection(connection);
+}</code></pre>
+				<a href="#options-and-attributes" id="options-and-attributes" style="color: inherit; text-decoration: none;">
+					<h2>Options and Attributes</h2>
+				</a>
+				<p>A server defines <code>attributes</code> which define it&#39;s behavior.  Variables like <code>canChat</code> are defined here. <code>options</code> are passed in, and come from <code>api.config.servers[serverName]</code>.  These can be new variables (like https?) or they can also overwrite the set <code>attributes</code>.
+				The required attributes are provided in a generated server.</p>
+				<a href="#verbs" id="verbs" style="color: inherit; text-decoration: none;">
+					<h2>Verbs</h2>
+				</a>
+				<pre><code class="language-js">allowedVerbs: [
+  <span class="hljs-string">"quit"</span>,
+  <span class="hljs-string">"exit"</span>,
+  <span class="hljs-string">"paramAdd"</span>,
+  <span class="hljs-string">"paramDelete"</span>,
+  <span class="hljs-string">"paramView"</span>,
+  <span class="hljs-string">"paramsView"</span>,
+  <span class="hljs-string">"paramsDelete"</span>,
+  <span class="hljs-string">"roomChange"</span>,
+  <span class="hljs-string">"roomView"</span>,
+  <span class="hljs-string">"listenToRoom"</span>,
+  <span class="hljs-string">"silenceRoom"</span>,
+  <span class="hljs-string">"detailsView"</span>,
+  <span class="hljs-string">"say"</span>
+]</code></pre>
+				<p>When an incoming message is detected, it is the server&#39;s job to build <code>connection.params</code>.  In the <code>web</code> server, this is accomplished by reading GET, POST, and form data.  For <code>websocket</code> clients, that information is expected to be emitted as part of the action&#39;s request.  For other clients, like <code>socket</code>, ActionHero provides helpers for long-lasting clients to operate on themselves.  These are called connection <code>verbs</code>.</p>
+				<p>Clients use verbs to add params to themselves, update the chat room they are in, and more.   The list of verbs currently supported is listed above.</p>
+				<p>Your server should be smart enough to tell when a client is trying to run an action, request a file, or use a verb.  One of the attributes of each server is <code>allowedVerbs</code>, which defines what verbs a client is allowed to preform.  A simplified example of how the <code>socket</code> server does this:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">async</span> parseRequest (connection, line) {
+  <span class="hljs-keyword">let</span> words = line.split(<span class="hljs-string">' '</span>)
+  <span class="hljs-keyword">let</span> verb = words.shift()
+
+  <span class="hljs-keyword">if</span> (verb === <span class="hljs-string">'file'</span>) {
+    <span class="hljs-keyword">if</span> (words.length &gt; <span class="hljs-number">0</span>) { connection.params.file = words[<span class="hljs-number">0</span>] }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.processFile(connection)
+  }
+
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.attributes.verbs.indexOf(verb) &gt;= <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">let</span> data = <span class="hljs-keyword">await</span> connection.verbs(verb, words)
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.sendMessage(connection, {<span class="hljs-attr">status</span>: <span class="hljs-string">'OK'</span>, <span class="hljs-attr">context</span>: <span class="hljs-string">'response'</span>, <span class="hljs-attr">data</span>: data})
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.sendMessage(connection, {<span class="hljs-attr">error</span>: error, <span class="hljs-attr">context</span>: <span class="hljs-string">'response'</span>})
+    }
+  }
+
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">let</span> requestHash = <span class="hljs-built_in">JSON</span>.parse(line)
+    <span class="hljs-keyword">if</span> (requestHash.params !== <span class="hljs-literal">undefined</span>) {
+      connection.params = {}
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> v <span class="hljs-keyword">in</span> requestHash.params) {
+        connection.params[v] = requestHash.params[v]
+      }
+    }
+    <span class="hljs-keyword">if</span> (requestHash.action) {
+      connection.params.action = requestHash.action
+    }
+  } <span class="hljs-keyword">catch</span> (e) {
+    connection.params.action = verb
+  }
+  connection.error = <span class="hljs-literal">null</span>
+  connection.response = {}
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.processAction(connection)
+}</code></pre>
+				<a href="#chat" id="chat" style="color: inherit; text-decoration: none;">
+					<h2>Chat</h2>
+				</a>
+				<p>The <code>attribute</code> &quot;canChat&quot; defines if clients of this server can chat.  If clients can chat, they should be allowed to use verbs like &quot;roomChange&quot; and &quot;say&quot;.  They will also be sent messages in their room (and rooms they are listening too) automatically.</p>
+				<a href="#sending-responses" id="sending-responses" style="color: inherit; text-decoration: none;">
+					<h2>Sending Responses</h2>
+				</a>
+				<p>All servers need to implement the <code>server.sendMessage = function(connection, message, messageId)</code> method so ActionHero knows how to talk to each client.  This is likely to make use of <code>connection.rawConnection</code>.  If you are writing a server for a persistent connection, it is likely you will need to respond with <code>messageId</code> so that the client knows which request your response is about (as they are not always going to get the responses in order).</p>
+				<a href="#sending-files" id="sending-files" style="color: inherit; text-decoration: none;">
+					<h2>Sending Files</h2>
+				</a>
+				<p>Servers can optionally implement the <code>server.sendFile = function(connection, error, fileStream, mime, length)</code> method.  This method is responsible for any connection-specific file transport (headers, chinking, encoding, etc). Note that fileStream is a <code>stream</code> which should be <code>pipe</code>&#39;d to the client.</p>
+				<a href="#customizing-servers" id="customizing-servers" style="color: inherit; text-decoration: none;">
+					<h2>Customizing Servers</h2>
+				</a>
+				<pre><code class="language-js"><span class="hljs-comment">//Initializer</span>
+ <span class="hljs-built_in">module</span>.exports = {
+   <span class="hljs-attr">startPriority</span>: <span class="hljs-number">1000</span>,
+   <span class="hljs-attr">start</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">api, next</span>) </span>{
+     <span class="hljs-keyword">let</span> webServer = api.servers.servers.web
+     webServer.connectionCustomMethods = webServer.connectionCustomMethods || {}
+     webServer.connectionCustomMethods.requestHeaders = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">connection</span>) </span>{
+       <span class="hljs-keyword">return</span> connection.rawConnection.req.headers
+     }
+   }
+ }
+
+ <span class="hljs-comment">//Action</span>
+ <span class="hljs-built_in">module</span>.exports = {
+   <span class="hljs-attr">name</span>: <span class="hljs-string">'logHeaders'</span>,
+   description <span class="hljs-string">'Log Web Request Headers'</span>,
+   <span class="hljs-attr">run</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">api, data, next</span>) </span>{
+     <span class="hljs-keyword">let</span> headers = data.connection.requestHeaders()
+     api.log(<span class="hljs-string">'Headers:'</span>, <span class="hljs-string">'debug'</span>, headers)
+     next()
+   }
+ }</code></pre>
+				<p>The <code>connection</code> object passed to a server can be customized on a per server basis through the use of the <code>server.connectionCustomMethods</code> hash. The hash can be populated with functions whose signature must match <code>function (connection, ...)</code>. Once populated, these functions are curried to always pass <code>connection</code> as the first argument and applied to the <code>data.connection</code> object passed to Actions, and can be accessed via <code>data.connection.functionName(...)</code> within the action or middleware.</p>
+				<p>In this way, you can create custom methods on your connections.</p>
+				<hr>
+				<ul>
+					<li><a href="web-server.html">Web Server</a></li>
+					<li><a href="websocket-server.html">Websocket Server</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../../../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current ">
+						<a href="../../index.html">Tutorial index</a>
+						<ul>
+							<li class="current ">
+								<a href="../index.html">Actionhero <wbr>Core <wbr>Features</a>
+								<ul>
+									<li class=" ">
+										<a href="../actions.html">Actions</a>
+									</li>
+									<li class=" ">
+										<a href="../tasks.html">Tasks</a>
+									</li>
+									<li class=" ">
+										<a href="../initializers.html">Initializers</a>
+									</li>
+									<li class=" ">
+										<a href="../localization.html">Localization</a>
+									</li>
+									<li class=" ">
+										<a href="../middleware.html">Middleware</a>
+									</li>
+									<li class=" ">
+										<a href="../testing.html">Testing</a>
+									</li>
+									<li class=" ">
+										<a href="../chat.html">Chat</a>
+									</li>
+									<li class="current ">
+										<a href="index.html">Servers</a>
+										<ul>
+											<li class=" ">
+												<a href="web-server.html">Web <wbr>Server</a>
+											</li>
+											<li class=" ">
+												<a href="websocket-server.html">Websocket <wbr>Server</a>
+											</li>
+										</ul>
+									</li>
+									<li class=" ">
+										<a href="../cli.html">Cli</a>
+									</li>
+								</ul>
+							</li>
+							<li class=" ">
+								<a href="../../config-and-dev/index.html">Configuration and <wbr>Development</a>
+							</li>
+							<li class=" ">
+								<a href="../../advanced/index.html">Advanced <wbr>Actionhero <wbr>Topics</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../../../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../../../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
