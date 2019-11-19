@@ -69,6 +69,15 @@
 				<p>One of the ways to upgrade your project is to generate a new project using the latest ActionHero framework (<code>npm install actionhero &amp;&amp; npx actionhero generate</code>). Using that as your starting point you can then carefully copy all your <code>configs</code>, <code>initializers</code>, <code>servers</code>, <code>tasks</code>, <code>actions</code>, and other custom code from your old project, making sure that you are at the same working state as before. It&#39;s a good practice to make tests for your actions (or any other component) before you plan to upgrade your ActionHero project.</p>
 				<p>With good <a href="tutorial-testing.html">test coverage</a> you can make sure that you have successfully upgraded your project.</p>
 				<p>ActionHero follows <a href="http://semver.org/">semantic versioning</a>. This means that a minor change is a right-most number. A new feature added is the middle number, and a breaking change is the left number. You should expect something in your application to need to be changed if you upgrade a major version.</p>
+				<a href="#upgrading-from-v20-to-v21" id="upgrading-from-v20-to-v21" style="color: inherit; text-decoration: none;">
+					<h2>Upgrading from v20 to v21</h2>
+				</a>
+				<p>WIP: This is a large change to Typescript. Detailed notes can be found on the Typescript page.</p>
+				<a href="#upgrading-from-v19-to-v20" id="upgrading-from-v19-to-v20" style="color: inherit; text-decoration: none;">
+					<h2>Upgrading from v19 to v20</h2>
+				</a>
+				<p><strong>Full Release Notes: <a href="https://github.com/actionhero/actionhero/releases/tag/v20.0.0">GitHub</a></strong></p>
+				<p>The only change to take note of is that you must now ensure that the working directory (CWD/PWD) in use when you start your actionhero project is the root. (where /config, /actions, etc) are visable.</p>
 				<a href="#upgrading-from-v18-to-v19" id="upgrading-from-v18-to-v19" style="color: inherit; text-decoration: none;">
 					<h2>Upgrading from v18 to v19</h2>
 				</a>
@@ -77,11 +86,11 @@
 					<h3>Configuration</h3>
 				</a>
 				<ul>
-					<li>in <code>config/tasks.js</code> <code>add api.config.tasks.stuckWorkerTimeout = 3600000</code>.  This will be a 1 hour timeout for stuck/crashed worker processes</li>
-					<li>in <code>config/servers/websocket.js</code> <code>add api.config.servers.websocket.client.cookieKey = api.config.servers.web.fingerprintOptions.cookieKey</code>.  This will instruct the ActionHero Websocket Clients to share the same cookie as the web server to share a fingerprint, which can be used to share session information.</li>
-					<li>If you plan to use Jest for your tests, and want to test in parallel, you will need to configure your server in the test environment to make use of <code>process.env.JEST_WORKER_ID</code>.  Please view <a href="https://github.com/actionhero/actionhero/blob/master/config/api.js"><code>config/api.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/redis.js"><code>config/redis.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/socket.js"><code>config/servers/socket.js</code></a>, and <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/web.js"><code>config/servers/web.js</code></a> for more information</li>
+					<li>in <code>config/tasks.js</code> <code>add api.config.tasks.stuckWorkerTimeout = 3600000</code>. This will be a 1 hour timeout for stuck/crashed worker processes</li>
+					<li>in <code>config/servers/websocket.js</code> <code>add api.config.servers.websocket.client.cookieKey = api.config.servers.web.fingerprintOptions.cookieKey</code>. This will instruct the ActionHero Websocket Clients to share the same cookie as the web server to share a fingerprint, which can be used to share session information.</li>
+					<li>If you plan to use Jest for your tests, and want to test in parallel, you will need to configure your server in the test environment to make use of <code>process.env.JEST_WORKER_ID</code>. Please view <a href="https://github.com/actionhero/actionhero/blob/master/config/api.js"><code>config/api.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/redis.js"><code>config/redis.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/socket.js"><code>config/servers/socket.js</code></a>, and <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/web.js"><code>config/servers/web.js</code></a> for more information</li>
 				</ul>
-				<a href="#upgrading-from-v19-to-v20" id="upgrading-from-v19-to-v20" style="color: inherit; text-decoration: none;">
+				<a href="#upgrading-from-v19-to-v20-1" id="upgrading-from-v19-to-v20-1" style="color: inherit; text-decoration: none;">
 					<h2>Upgrading from v19 to v20</h2>
 				</a>
 				<p><strong>Full Release Notes: <a href="https://github.com/actionhero/actionhero/releases/tag/v20.0.0">GitHub</a></strong></p>
@@ -89,120 +98,120 @@
 					<li>In <code>config/api.js</code> add <code>api.config.general.paths.test = [path.join(__dirname, &#39;/../__tests__&#39;)]</code> so that when you generate a new action or task, the related test file can be generated as well.</li>
 					<li>However you run actionhero, be sure to <code>cd</code> into the root directory of the project before starting the server.</li>
 				</ul>
-				<a href="#upgrading-from-v19-to-v20-1" id="upgrading-from-v19-to-v20-1" style="color: inherit; text-decoration: none;">
+				<a href="#upgrading-from-v19-to-v20-2" id="upgrading-from-v19-to-v20-2" style="color: inherit; text-decoration: none;">
 					<h2>Upgrading from v19 to v20</h2>
 				</a>
 				<p><strong>Full Release Notes: <a href="https://github.com/actionhero/actionhero/releases/tag/v19.0.0">GitHub</a></strong></p>
 				<ul>
-					<li>in <code>config/tasks.js</code> <code>add api.config.tasks.stuckWorkerTimeout = 3600000</code>.  This will be a 1 hour timeout for stuck/crashed worker processes</li>
-					<li>in <code>config/servers/websocket.js</code> <code>add api.config.servers.websocket.client.cookieKey = api.config.servers.web.fingerprintOptions.cookieKey</code>.  This will instruct the ActionHero Websocket Clients to share the same cookie as the web server to share a fingerprint, which can be used to share session information.</li>
-					<li>If you plan to use Jest for your tests, and want to test in parallel, you will need to configure your server in the test environment to make use of <code>process.env.JEST_WORKER_ID</code>.  Please view <a href="https://github.com/actionhero/actionhero/blob/master/config/api.js"><code>config/api.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/redis.js"><code>config/redis.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/socket.js"><code>config/servers/socket.js</code></a>, and <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/web.js"><code>config/servers/web.js</code></a> for more information</li>
+					<li>in <code>config/tasks.js</code> <code>add api.config.tasks.stuckWorkerTimeout = 3600000</code>. This will be a 1 hour timeout for stuck/crashed worker processes</li>
+					<li>in <code>config/servers/websocket.js</code> <code>add api.config.servers.websocket.client.cookieKey = api.config.servers.web.fingerprintOptions.cookieKey</code>. This will instruct the ActionHero Websocket Clients to share the same cookie as the web server to share a fingerprint, which can be used to share session information.</li>
+					<li>If you plan to use Jest for your tests, and want to test in parallel, you will need to configure your server in the test environment to make use of <code>process.env.JEST_WORKER_ID</code>. Please view <a href="https://github.com/actionhero/actionhero/blob/master/config/api.js"><code>config/api.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/redis.js"><code>config/redis.js</code></a>, <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/socket.js"><code>config/servers/socket.js</code></a>, and <a href="https://github.com/actionhero/actionhero/blob/master/config/servers/web.js"><code>config/servers/web.js</code></a> for more information</li>
 				</ul>
 				<a href="#upgrading-from-v17-to-v18" id="upgrading-from-v17-to-v18" style="color: inherit; text-decoration: none;">
 					<h2>Upgrading from v17 to v18</h2>
 				</a>
 				<p><strong>Full Release Notes: <a href="https://github.com/actionhero/actionhero/releases/tag/v18.0.0">GitHub</a></strong></p>
 				<p><strong>Breaking Changes and How to Overcome Them:</strong></p>
-				<p>There are <em>many</em> changes to the APIs actionhero exposes.  You can read up on the new syntax on our <a href="https://docs.actionherojs.com">new documentation website, docs.actionherojs.com</a></p>
+				<p>There are <em>many</em> changes to the APIs actionhero exposes. You can read up on the new syntax on our <a href="https://docs.actionherojs.com">new documentation website, docs.actionherojs.com</a></p>
 				<ul>
 					<li><p><strong>Node.js version</strong></p>
 						<ul>
-							<li>Node.js v8 and higher is now required.  You must update your projects.</li>
+							<li>Node.js v8 and higher is now required. You must update your projects.</li>
 						</ul>
 					</li>
 					<li><p><strong>Actions</strong></p>
 						<ul>
 							<li>Actions are now ES6 classes, which extend <code>require(&#39;actionhero&#39;).Action</code>.</li>
-							<li>The <code>run</code> method only has one argument now, <code>data</code> and becomes a <code>async</code> method.  <code>api</code> can be required globally to your file.</li>
+							<li>The <code>run</code> method only has one argument now, <code>data</code> and becomes a <code>async</code> method. <code>api</code> can be required globally to your file.</li>
 						</ul>
 					</li>
 				</ul>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> {Action, api} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'actionhero'</span>)
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Action, api } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"actionhero"</span>);
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAction</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Action</span> </span>{
- <span class="hljs-keyword">constructor</span> () {
-   <span class="hljs-keyword">super</span>()
-   <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'randomNumber'</span>
-   <span class="hljs-keyword">this</span>.description = <span class="hljs-string">'I am an API method which will generate a random number'</span>
-   <span class="hljs-keyword">this</span>.outputExample = {<span class="hljs-attr">randomNumber</span>: <span class="hljs-number">0.1234</span>}
- }
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">super</span>();
+    <span class="hljs-keyword">this</span>.name = <span class="hljs-string">"randomNumber"</span>;
+    <span class="hljs-keyword">this</span>.description = <span class="hljs-string">"I am an API method which will generate a random number"</span>;
+    <span class="hljs-keyword">this</span>.outputExample = { <span class="hljs-attr">randomNumber</span>: <span class="hljs-number">0.1234</span> };
+  }
 
- <span class="hljs-keyword">async</span> run (data) {
-   data.response.randomNumber = <span class="hljs-built_in">Math</span>.random()
- }
-}</code></pre>
+  <span class="hljs-keyword">async</span> run(data) {
+    data.response.randomNumber = <span class="hljs-built_in">Math</span>.random();
+  }
+};</code></pre>
 				<ul>
 					<li><strong>Tasks</strong><ul>
 							<li>Tasks are now ES6 classes, which extend <code>require(&#39;actionhero&#39;).Task</code>.</li>
-							<li>The <code>run</code> method only has one argument now, <code>data</code> and becomes a <code>async</code> method.  <code>api</code> can be required globally to your file.</li>
+							<li>The <code>run</code> method only has one argument now, <code>data</code> and becomes a <code>async</code> method. <code>api</code> can be required globally to your file.</li>
 						</ul>
 					</li>
 				</ul>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> {api, Task} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'actionhero'</span>)
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { api, Task } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"actionhero"</span>);
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SendWelcomeMessage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Task</span> </span>{
-  <span class="hljs-keyword">constructor</span> () {
-    <span class="hljs-keyword">super</span>()
-    <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'SendWelcomeEmail'</span>
-    <span class="hljs-keyword">this</span>.description = <span class="hljs-string">'I send the welcome email to new users'</span>
-    <span class="hljs-keyword">this</span>.frequency = <span class="hljs-number">0</span>
-    <span class="hljs-keyword">this</span>.queue = <span class="hljs-string">'high'</span>
-    <span class="hljs-keyword">this</span>.middleware = []
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">super</span>();
+    <span class="hljs-keyword">this</span>.name = <span class="hljs-string">"SendWelcomeEmail"</span>;
+    <span class="hljs-keyword">this</span>.description = <span class="hljs-string">"I send the welcome email to new users"</span>;
+    <span class="hljs-keyword">this</span>.frequency = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>.queue = <span class="hljs-string">"high"</span>;
+    <span class="hljs-keyword">this</span>.middleware = [];
   }
 
-  <span class="hljs-keyword">async</span> run (data) {
-    <span class="hljs-keyword">await</span> api.sendWelcomeEamail({<span class="hljs-attr">address</span>: data.email})
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+  <span class="hljs-keyword">async</span> run(data) {
+    <span class="hljs-keyword">await</span> api.sendWelcomeEamail({ <span class="hljs-attr">address</span>: data.email });
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
   }
-}</code></pre>
+};</code></pre>
 				<ul>
 					<li><strong>Initializers</strong><ul>
 							<li>Initializers are now ES6 classes, which extend <code>require(&#39;actionhero&#39;).Initializer</code>.</li>
-							<li>The <code>initialize</code>, <code>start</code>, and <code>stop</code> methods now have no arguments and become a <code>async</code> methods.  <code>api</code> can be required globally to your file.</li>
+							<li>The <code>initialize</code>, <code>start</code>, and <code>stop</code> methods now have no arguments and become a <code>async</code> methods. <code>api</code> can be required globally to your file.</li>
 						</ul>
 					</li>
 				</ul>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> {ActionHero, api} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'actionhero'</span>)
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { ActionHero, api } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"actionhero"</span>);
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StuffInit</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ActionHero</span>.<span class="hljs-title">Initializer</span> </span>{
-  <span class="hljs-keyword">constructor</span> () {
-    <span class="hljs-keyword">super</span>()
-    <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'StuffInit'</span>
-    <span class="hljs-keyword">this</span>.loadPriority = <span class="hljs-number">1000</span>
-    <span class="hljs-keyword">this</span>.startPriority = <span class="hljs-number">1000</span>
-    <span class="hljs-keyword">this</span>.stopPriority = <span class="hljs-number">1000</span>
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">super</span>();
+    <span class="hljs-keyword">this</span>.name = <span class="hljs-string">"StuffInit"</span>;
+    <span class="hljs-keyword">this</span>.loadPriority = <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">this</span>.startPriority = <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">this</span>.stopPriority = <span class="hljs-number">1000</span>;
   }
 
-  <span class="hljs-keyword">async</span> initialize () {
-    api.StuffInit = {}
-    api.StuffInit.doAThing = <span class="hljs-keyword">async</span> () =&gt; {}
-    api.StuffInit.stopStuff = <span class="hljs-keyword">async</span> () =&gt; {}
-    api.log(<span class="hljs-string">'I initialized'</span>, <span class="hljs-string">'debug'</span>, <span class="hljs-keyword">this</span>.name)
+  <span class="hljs-keyword">async</span> initialize() {
+    api.StuffInit = {};
+    api.StuffInit.doAThing = <span class="hljs-keyword">async</span> () =&gt; {};
+    api.StuffInit.stopStuff = <span class="hljs-keyword">async</span> () =&gt; {};
+    api.log(<span class="hljs-string">"I initialized"</span>, <span class="hljs-string">"debug"</span>, <span class="hljs-keyword">this</span>.name);
   }
 
-  <span class="hljs-keyword">async</span> start () {
-    <span class="hljs-keyword">await</span> api.StuffInit.startStuff()
-    api.log(<span class="hljs-string">'I started'</span>, <span class="hljs-string">'debug'</span>, <span class="hljs-keyword">this</span>.name)
+  <span class="hljs-keyword">async</span> start() {
+    <span class="hljs-keyword">await</span> api.StuffInit.startStuff();
+    api.log(<span class="hljs-string">"I started"</span>, <span class="hljs-string">"debug"</span>, <span class="hljs-keyword">this</span>.name);
   }
 
-  <span class="hljs-keyword">async</span> stop () {
-    <span class="hljs-keyword">await</span> api.StuffInit.stopStuff()
-    api.log(<span class="hljs-string">'I stopped'</span>, <span class="hljs-string">'debug'</span>, <span class="hljs-keyword">this</span>.name)
+  <span class="hljs-keyword">async</span> stop() {
+    <span class="hljs-keyword">await</span> api.StuffInit.stopStuff();
+    api.log(<span class="hljs-string">"I stopped"</span>, <span class="hljs-string">"debug"</span>, <span class="hljs-keyword">this</span>.name);
   }
-}</code></pre>
+};</code></pre>
 				<ul>
 					<li><strong>Servers</strong><ul>
 							<li>Servers are now ES6 classes, which extend <code>require(&#39;actionhero&#39;).Server</code>.</li>
-							<li>The <code>initialize</code>, <code>start</code>, and <code>stop</code> methods now have no arguments and become a <code>async</code> methods.  <code>api</code> can be required globally to your file.</li>
+							<li>The <code>initialize</code>, <code>start</code>, and <code>stop</code> methods now have no arguments and become a <code>async</code> methods. <code>api</code> can be required globally to your file.</li>
 						</ul>
 					</li>
 				</ul>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> ActionHero = <span class="hljs-built_in">require</span>(<span class="hljs-string">'actionhero'</span>)
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> ActionHero = <span class="hljs-built_in">require</span>(<span class="hljs-string">"actionhero"</span>);
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyServer</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ActionHero</span>.<span class="hljs-title">Server</span> </span>{
-  <span class="hljs-keyword">constructor</span> () {
-    <span class="hljs-keyword">super</span>()
-    <span class="hljs-keyword">this</span>.type = <span class="hljs-string">'%%name%%'</span>
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">super</span>();
+    <span class="hljs-keyword">this</span>.type = <span class="hljs-string">"%%name%%"</span>;
 
     <span class="hljs-keyword">this</span>.attributes = {
       <span class="hljs-attr">canChat</span>: <span class="hljs-literal">false</span>,
@@ -210,46 +219,34 @@
       <span class="hljs-attr">logExits</span>: <span class="hljs-literal">true</span>,
       <span class="hljs-attr">sendWelcomeMessage</span>: <span class="hljs-literal">false</span>,
       <span class="hljs-attr">verbs</span>: []
-    }
+    };
     <span class="hljs-comment">// this.config will be set to equal api.config.servers[this.type]</span>
   }
 
-  initialize () {
-    <span class="hljs-keyword">this</span>.on(<span class="hljs-string">'connection'</span>, (conection) =&gt; {
+  initialize() {
+    <span class="hljs-keyword">this</span>.on(<span class="hljs-string">"connection"</span>, conection =&gt; {});
 
-    })
-
-    <span class="hljs-keyword">this</span>.on(<span class="hljs-string">'actionComplete'</span>, (data) =&gt; {
-
-    })
+    <span class="hljs-keyword">this</span>.on(<span class="hljs-string">"actionComplete"</span>, data =&gt; {});
   }
 
-  start () {
+  start() {
     <span class="hljs-comment">// this.buildConnection (data)</span>
     <span class="hljs-comment">// this.processAction (connection)</span>
     <span class="hljs-comment">// this.processFile (connection)</span>
   }
 
-  stop () {
+  stop() {}
 
-  }
+  sendMessage(connection, message, messageId) {}
 
-  sendMessage (connection, message, messageId) {
+  sendFile(connection, error, fileStream, mime, length, lastModified) {}
 
-  }
-
-  sendFile (connection, error, fileStream, mime, length, lastModified) {
-
-  }
-
-  goodbye (connection) {
-
-  }
-}</code></pre>
+  goodbye(connection) {}
+};</code></pre>
 				<ul>
 					<li><strong>CLI Commands</strong><ul>
 							<li>CLI Commands are now ES6 classes, which extend <code>require(&#39;actionhero&#39;).CLI</code>.</li>
-							<li>The <code>run</code> method now has one argument, <code>data</code> and becomes a <code>async</code> method.  <code>api</code> can be required globally to your file.</li>
+							<li>The <code>run</code> method now has one argument, <code>data</code> and becomes a <code>async</code> method. <code>api</code> can be required globally to your file.</li>
 						</ul>
 					</li>
 				</ul>
@@ -301,35 +298,39 @@
 						</ul>
 					</li>
 				</ul>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> chai = <span class="hljs-built_in">require</span>(<span class="hljs-string">'chai'</span>)
-<span class="hljs-keyword">const</span> dirtyChai = <span class="hljs-built_in">require</span>(<span class="hljs-string">'dirty-chai'</span>)
-<span class="hljs-keyword">const</span> expect = chai.expect
-chai.use(dirtyChai)
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> chai = <span class="hljs-built_in">require</span>(<span class="hljs-string">"chai"</span>);
+<span class="hljs-keyword">const</span> dirtyChai = <span class="hljs-built_in">require</span>(<span class="hljs-string">"dirty-chai"</span>);
+<span class="hljs-keyword">const</span> expect = chai.expect;
+chai.use(dirtyChai);
 
-<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>)
-<span class="hljs-keyword">const</span> ActionHero = <span class="hljs-built_in">require</span>(<span class="hljs-string">'actionhero'</span>)
-<span class="hljs-keyword">const</span> actionhero = <span class="hljs-keyword">new</span> ActionHero.Process()
-<span class="hljs-keyword">let</span> api
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
+<span class="hljs-keyword">const</span> ActionHero = <span class="hljs-built_in">require</span>(<span class="hljs-string">"actionhero"</span>);
+<span class="hljs-keyword">const</span> actionhero = <span class="hljs-keyword">new</span> ActionHero.Process();
+<span class="hljs-keyword">let</span> api;
 
-describe(<span class="hljs-string">'Action: RandomNumber'</span>, () =&gt; {
-  before(<span class="hljs-keyword">async</span> () =&gt; { api = <span class="hljs-keyword">await</span> actionhero.start() })
-  after(<span class="hljs-keyword">async</span> () =&gt; { <span class="hljs-keyword">await</span> actionhero.stop() })
+describe(<span class="hljs-string">"Action: RandomNumber"</span>, () =&gt; {
+  before(<span class="hljs-keyword">async</span> () =&gt; {
+    api = <span class="hljs-keyword">await</span> actionhero.start();
+  });
+  after(<span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">await</span> actionhero.stop();
+  });
 
-  <span class="hljs-keyword">let</span> firstNumber = <span class="hljs-literal">null</span>
-  it(<span class="hljs-string">'generates random numbers'</span>, <span class="hljs-keyword">async</span> () =&gt; {
-    <span class="hljs-keyword">let</span> {randomNumber} = <span class="hljs-keyword">await</span> api.specHelper.runAction(<span class="hljs-string">'randomNumber'</span>)
-    expect(randomNumber).to.be.at.least(<span class="hljs-number">0</span>)
-    expect(randomNumber).to.be.at.most(<span class="hljs-number">1</span>)
-    firstNumber = randomNumber
-  })
+  <span class="hljs-keyword">let</span> firstNumber = <span class="hljs-literal">null</span>;
+  it(<span class="hljs-string">"generates random numbers"</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">let</span> { randomNumber } = <span class="hljs-keyword">await</span> api.specHelper.runAction(<span class="hljs-string">"randomNumber"</span>);
+    expect(randomNumber).to.be.at.least(<span class="hljs-number">0</span>);
+    expect(randomNumber).to.be.at.most(<span class="hljs-number">1</span>);
+    firstNumber = randomNumber;
+  });
 
-  it(<span class="hljs-string">'is unique / random'</span>, <span class="hljs-keyword">async</span> () =&gt; {
-    <span class="hljs-keyword">let</span> {randomNumber} = <span class="hljs-keyword">await</span> api.specHelper.runAction(<span class="hljs-string">'randomNumber'</span>)
-    expect(randomNumber).to.be.at.least(<span class="hljs-number">0</span>)
-    expect(randomNumber).to.be.at.most(<span class="hljs-number">1</span>)
-    expect(randomNumber).not.to.equal(firstNumber)
-  })
-})</code></pre>
+  it(<span class="hljs-string">"is unique / random"</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">let</span> { randomNumber } = <span class="hljs-keyword">await</span> api.specHelper.runAction(<span class="hljs-string">"randomNumber"</span>);
+    expect(randomNumber).to.be.at.least(<span class="hljs-number">0</span>);
+    expect(randomNumber).to.be.at.most(<span class="hljs-number">1</span>);
+    expect(randomNumber).not.to.equal(firstNumber);
+  });
+});</code></pre>
 				<ul>
 					<li><p><strong>Utils</strong></p>
 						<ul>
@@ -339,11 +340,11 @@ describe(<span class="hljs-string">'Action: RandomNumber'</span>, () =&gt; {
 					</li>
 					<li><p><strong>Plugins</strong></p>
 						<ul>
-							<li>ActionHero no longer uses linkfiles to find plugins.  If you have any in a <code>plugins</code> directory in your actions, tasks, config, or public folders, delete them.</li>
-							<li>Plugins now need to be defined explicitly in a new <code>./config/plugins.js</code> config file.  You should create one <a href="https://github.com/actionhero/actionhero/blob/master/config/plugins.js">per the example</a></li>
+							<li>ActionHero no longer uses linkfiles to find plugins. If you have any in a <code>plugins</code> directory in your actions, tasks, config, or public folders, delete them.</li>
+							<li>Plugins now need to be defined explicitly in a new <code>./config/plugins.js</code> config file. You should create one <a href="https://github.com/actionhero/actionhero/blob/master/config/plugins.js">per the example</a></li>
 							<li>Removed <code>actionhero link</code> and <code>actionhero unlink</code> per the above.</li>
 							<li>Added <code>actionhero generate plugin</code>, a helper which you can use in an empty directory which will create a template plugin project</li>
-							<li>Testing plugins is now simpler.  <a href="https://docs.actionherojs.com/tutorial-plugins.html">Read more about this on docs.actionherojs.com</a></li>
+							<li>Testing plugins is now simpler. <a href="https://docs.actionherojs.com/tutorial-plugins.html">Read more about this on docs.actionherojs.com</a></li>
 						</ul>
 					</li>
 					<li><p><strong>Clients</strong></p>
@@ -479,21 +480,9 @@ describe(<span class="hljs-string">'Action: RandomNumber'</span>, () =&gt; {
 				<p><strong>Breaking Changes and How to Overcome Them:</strong></p>
 				<ul>
 					<li>Action Syntax changed<ul>
-							<li><code>run: function(api, data, next){
-  data.response.randomNumber = Math.random();
-  next(error);
-}</code></li>
+							<li><code>run: function(api, data, next){ data.response.randomNumber = Math.random(); next(error); }</code></li>
 							<li>Where data contains:</li>
-							<li><code>data = {
-   connection: connection,
-   action: &#39;randomNumber&#39;,
-   toProcess: true,
-   toRender: true,
-   messageId: 123,
-   params: { action: &#39;randomNumber&#39;, apiVersion: 1 },
-   actionStartTime: 123,
-   response: {},
-}</code></li>
+							<li><code>data = { connection: connection, action: &#39;randomNumber&#39;, toProcess: true, toRender: true, messageId: 123, params: { action: &#39;randomNumber&#39;, apiVersion: 1 }, actionStartTime: 123, response: {}, }</code></li>
 							<li>You will need to change all of your actions to use <code>data.connection</code> rather than <code>connection</code> directly.</li>
 							<li>You will need to change all of your actions to use <code>data.response</code> rather than <code>connection.response</code> directly.</li>
 						</ul>
