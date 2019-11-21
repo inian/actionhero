@@ -56,7 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="chatmiddleware.html">ChatMiddleware</a>
+					<a href="../modules/chatroom.html">chatRoom</a>
+				</li>
+				<li>
+					<a href="chatroom.chatmiddleware.html">ChatMiddleware</a>
 				</li>
 			</ul>
 			<h1>Interface ChatMiddleware</h1>
@@ -85,12 +88,12 @@
    <span class="hljs-comment">// Will be executed once per client connection before delivering the message.</span>
    <span class="hljs-attr">say</span>: <span class="hljs-function">(<span class="hljs-params">connection, room, messagePayload</span>) =&gt;</span> {
      <span class="hljs-comment">// do stuff</span>
-     api.log(messagePayload)
+     log(messagePayload)
    },
    <span class="hljs-comment">// Will be executed only once, when the message is sent to the server.</span>
    <span class="hljs-attr">onSayReceive</span>: <span class="hljs-function">(<span class="hljs-params">connection, room, messagePayload</span>) =&gt;</span> {
      <span class="hljs-comment">// do stuff</span>
-     api.log(messagePayload)
+     log(messagePayload)
    }
 }
 api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
@@ -111,12 +114,12 @@ api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatmiddleware.html#join" class="tsd-kind-icon">join</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatmiddleware.html#leave" class="tsd-kind-icon">leave</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatmiddleware.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatmiddleware.html#onsayreceive" class="tsd-kind-icon">on<wbr>Say<wbr>Receive</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatmiddleware.html#priority" class="tsd-kind-icon">priority</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatmiddleware.html#say" class="tsd-kind-icon">say</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatroom.chatmiddleware.html#join" class="tsd-kind-icon">join</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatroom.chatmiddleware.html#leave" class="tsd-kind-icon">leave</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatroom.chatmiddleware.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatroom.chatmiddleware.html#onsayreceive" class="tsd-kind-icon">on<wbr>Say<wbr>Receive</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatroom.chatmiddleware.html#priority" class="tsd-kind-icon">priority</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="chatroom.chatmiddleware.html#say" class="tsd-kind-icon">say</a></li>
 							</ul>
 						</section>
 					</div>
@@ -130,7 +133,7 @@ api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
 					<div class="tsd-signature tsd-kind-icon">join<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/chatRoom.ts#L41">initializers/chatRoom.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/modules/chatRoom.ts#L41">modules/chatRoom.ts:41</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -145,7 +148,7 @@ api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
 					<div class="tsd-signature tsd-kind-icon">leave<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/chatRoom.ts#L43">initializers/chatRoom.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/modules/chatRoom.ts#L43">modules/chatRoom.ts:43</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -160,7 +163,7 @@ api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/chatRoom.ts#L37">initializers/chatRoom.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/modules/chatRoom.ts#L37">modules/chatRoom.ts:37</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -175,7 +178,7 @@ api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
 					<div class="tsd-signature tsd-kind-icon">on<wbr>Say<wbr>Receive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/chatRoom.ts#L45">initializers/chatRoom.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/modules/chatRoom.ts#L45">modules/chatRoom.ts:45</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -190,7 +193,7 @@ api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
 					<div class="tsd-signature tsd-kind-icon">priority<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/chatRoom.ts#L39">initializers/chatRoom.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/modules/chatRoom.ts#L39">modules/chatRoom.ts:39</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -205,7 +208,7 @@ api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
 					<div class="tsd-signature tsd-kind-icon">say<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/chatRoom.ts#L47">initializers/chatRoom.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/modules/chatRoom.ts#L47">modules/chatRoom.ts:47</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -222,6 +225,30 @@ api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/action.html">action</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/cache.html">cache</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/chatroom.html">chat<wbr>Room</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/i18n.html">i18n</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/redis.html">redis</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/route.html">route</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/spechelper.html">spec<wbr>Helper</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/task.html">task</a>
+					</li>
 					<li class=" ">
 						<a href="../tutorials/index.html">Tutorial index</a>
 					</li>
@@ -231,31 +258,64 @@ api.chatRoom.addMiddleware(chatMiddleware)</code></pre>
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="chatmiddleware.html" class="tsd-kind-icon">Chat<wbr>Middleware</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="chatroom.chatmiddleware.html" class="tsd-kind-icon">Chat<wbr>Middleware</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="chatmiddleware.html#join" class="tsd-kind-icon">join</a>
+								<a href="chatroom.chatmiddleware.html#join" class="tsd-kind-icon">join</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="chatmiddleware.html#leave" class="tsd-kind-icon">leave</a>
+								<a href="chatroom.chatmiddleware.html#leave" class="tsd-kind-icon">leave</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="chatmiddleware.html#name" class="tsd-kind-icon">name</a>
+								<a href="chatroom.chatmiddleware.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="chatmiddleware.html#onsayreceive" class="tsd-kind-icon">on<wbr>Say<wbr>Receive</a>
+								<a href="chatroom.chatmiddleware.html#onsayreceive" class="tsd-kind-icon">on<wbr>Say<wbr>Receive</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="chatmiddleware.html#priority" class="tsd-kind-icon">priority</a>
+								<a href="chatroom.chatmiddleware.html#priority" class="tsd-kind-icon">priority</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="chatmiddleware.html#say" class="tsd-kind-icon">say</a>
+								<a href="chatroom.chatmiddleware.html#say" class="tsd-kind-icon">say</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="chatroom.chatpubsubmessage.html" class="tsd-kind-icon">Chat<wbr>Pub<wbr>Sub<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#add" class="tsd-kind-icon">add</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#addmember" class="tsd-kind-icon">add<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#addmiddleware" class="tsd-kind-icon">add<wbr>Middleware</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#destroy" class="tsd-kind-icon">destroy</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#exists" class="tsd-kind-icon">exists</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#generatememberdetails" class="tsd-kind-icon">generate<wbr>Member<wbr>Details</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#list" class="tsd-kind-icon">list</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#removemember" class="tsd-kind-icon">remove<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#roomstatus" class="tsd-kind-icon">room<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/chatroom.html#sanitizememberdetails" class="tsd-kind-icon">sanitize<wbr>Member<wbr>Details</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

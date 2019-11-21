@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CacheObject | actionhero</title>
+	<title>TaskApi | actionhero</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="cacheobject.html">CacheObject</a>
+					<a href="taskapi.html">TaskApi</a>
 				</li>
 			</ul>
-			<h1>Interface CacheObject</h1>
+			<h1>Interface TaskApi</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CacheObject</span>
+						<span class="target">TaskApi</span>
 					</li>
 				</ul>
 			</section>
@@ -81,12 +81,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cacheobject.html#createdat" class="tsd-kind-icon">created<wbr>At</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cacheobject.html#expiretimestamp" class="tsd-kind-icon">expire<wbr>Timestamp</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cacheobject.html#key" class="tsd-kind-icon">key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cacheobject.html#lastreadat" class="tsd-kind-icon">last<wbr>Read<wbr>At</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cacheobject.html#readat" class="tsd-kind-icon">read<wbr>At</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cacheobject.html#value" class="tsd-kind-icon">value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="taskapi.html#globalmiddleware" class="tsd-kind-icon">global<wbr>Middleware</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="taskapi.html#jobwrapper" class="tsd-kind-icon">job<wbr>Wrapper</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="taskapi.html#jobs" class="tsd-kind-icon">jobs</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="taskapi.html#loadfile" class="tsd-kind-icon">load<wbr>File</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="taskapi.html#loadtasks" class="tsd-kind-icon">load<wbr>Tasks</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="taskapi.html#middleware" class="tsd-kind-icon">middleware</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="taskapi.html#tasks" class="tsd-kind-icon">tasks</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,64 +96,98 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="createdat" class="tsd-anchor"></a>
-					<h3>created<wbr>At</h3>
-					<div class="tsd-signature tsd-kind-icon">created<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="globalmiddleware" class="tsd-anchor"></a>
+					<h3>global<wbr>Middleware</h3>
+					<div class="tsd-signature tsd-kind-icon">global<wbr>Middleware<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/cache.ts#L8">initializers/cache.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/tasks.ts#L13">initializers/tasks.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="expiretimestamp" class="tsd-anchor"></a>
-					<h3>expire<wbr>Timestamp</h3>
-					<div class="tsd-signature tsd-kind-icon">expire<wbr>Timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="jobwrapper" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> job<wbr>Wrapper</h3>
+					<div class="tsd-signature tsd-kind-icon">job<wbr>Wrapper<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/cache.ts#L7">initializers/cache.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/tasks.ts#L15">initializers/tasks.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="key" class="tsd-anchor"></a>
-					<h3>key</h3>
-					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="jobs" class="tsd-anchor"></a>
+					<h3>jobs</h3>
+					<div class="tsd-signature tsd-kind-icon">jobs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/cache.ts#L5">initializers/cache.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/tasks.ts#L11">initializers/tasks.ts:11</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="loadfile" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> load<wbr>File</h3>
+					<div class="tsd-signature tsd-kind-icon">load<wbr>File<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/tasks.ts#L14">initializers/tasks.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="lastreadat" class="tsd-anchor"></a>
-					<h3>last<wbr>Read<wbr>At</h3>
-					<div class="tsd-signature tsd-kind-icon">last<wbr>Read<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="loadtasks" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> load<wbr>Tasks</h3>
+					<div class="tsd-signature tsd-kind-icon">load<wbr>Tasks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/cache.ts#L9">initializers/cache.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/tasks.ts#L16">initializers/tasks.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="readat" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> read<wbr>At</h3>
-					<div class="tsd-signature tsd-kind-icon">read<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="middleware" class="tsd-anchor"></a>
+					<h3>middleware</h3>
+					<div class="tsd-signature tsd-kind-icon">middleware<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/cache.ts#L10">initializers/cache.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/tasks.ts#L12">initializers/tasks.ts:12</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="task.taskmiddleware.html" class="tsd-signature-type">TaskMiddleware</a></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="value" class="tsd-anchor"></a>
-					<h3>value</h3>
-					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="tasks" class="tsd-anchor"></a>
+					<h3>tasks</h3>
+					<div class="tsd-signature tsd-kind-icon">tasks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/cache.ts#L6">initializers/cache.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/tasks.ts#L10">initializers/tasks.ts:10</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -172,25 +207,28 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="cacheobject.html" class="tsd-kind-icon">Cache<wbr>Object</a>
+						<a href="taskapi.html" class="tsd-kind-icon">Task<wbr>Api</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cacheobject.html#createdat" class="tsd-kind-icon">created<wbr>At</a>
+								<a href="taskapi.html#globalmiddleware" class="tsd-kind-icon">global<wbr>Middleware</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cacheobject.html#expiretimestamp" class="tsd-kind-icon">expire<wbr>Timestamp</a>
+								<a href="taskapi.html#jobwrapper" class="tsd-kind-icon">job<wbr>Wrapper</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cacheobject.html#key" class="tsd-kind-icon">key</a>
+								<a href="taskapi.html#jobs" class="tsd-kind-icon">jobs</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cacheobject.html#lastreadat" class="tsd-kind-icon">last<wbr>Read<wbr>At</a>
+								<a href="taskapi.html#loadfile" class="tsd-kind-icon">load<wbr>File</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cacheobject.html#readat" class="tsd-kind-icon">read<wbr>At</a>
+								<a href="taskapi.html#loadtasks" class="tsd-kind-icon">load<wbr>Tasks</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cacheobject.html#value" class="tsd-kind-icon">value</a>
+								<a href="taskapi.html#middleware" class="tsd-kind-icon">middleware</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="taskapi.html#tasks" class="tsd-kind-icon">tasks</a>
 							</li>
 						</ul>
 					</li>

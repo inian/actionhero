@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ActionMiddleware | actionhero</title>
+	<title>ExceptionHandlerAPI | actionhero</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,40 +56,21 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="actionmiddleware.html">ActionMiddleware</a>
+					<a href="exceptionhandlerapi.html">ExceptionHandlerAPI</a>
 				</li>
 			</ul>
-			<h1>Interface ActionMiddleware</h1>
+			<h1>Interface ExceptionHandlerAPI</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>var middleware = {
-							name: &#39;userId checker&#39;,
-							global: false,
-							priority: 1000,
-							preProcessor: async (data) =&gt; {
-							if(!data.params.userId){
-							throw new Error(&#39;All actions require a userId&#39;)
-							}
-							},
-							postProcessor: async (data) =&gt; {
-							if(data.thing.stuff == false){ data.toRender = false }
-							}
-						}</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ActionMiddleware</span>
+						<span class="target">ExceptionHandlerAPI</span>
 					</li>
 				</ul>
 			</section>
@@ -100,11 +81,11 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="actionmiddleware.html#global" class="tsd-kind-icon">global</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="actionmiddleware.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="actionmiddleware.html#postprocessor" class="tsd-kind-icon">post<wbr>Processor</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="actionmiddleware.html#preprocessor" class="tsd-kind-icon">pre<wbr>Processor</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="actionmiddleware.html#priority" class="tsd-kind-icon">priority</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exceptionhandlerapi.html#action" class="tsd-kind-icon">action</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exceptionhandlerapi.html#loader" class="tsd-kind-icon">loader</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exceptionhandlerapi.html#report" class="tsd-kind-icon">report</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exceptionhandlerapi.html#reporters" class="tsd-kind-icon">reporters</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exceptionhandlerapi.html#task" class="tsd-kind-icon">task</a></li>
 							</ul>
 						</section>
 					</div>
@@ -113,79 +94,54 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="global" class="tsd-anchor"></a>
-					<h3>global</h3>
-					<div class="tsd-signature tsd-kind-icon">global<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="action" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> action</h3>
+					<div class="tsd-signature tsd-kind-icon">action<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/actions.ts#L24">initializers/actions.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/exceptions.ts#L8">initializers/exceptions.ts:8</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Is this middleware applied to all actions?</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="loader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> loader</h3>
+					<div class="tsd-signature tsd-kind-icon">loader<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/actions.ts#L22">initializers/actions.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/exceptions.ts#L7">initializers/exceptions.ts:7</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Unique name for the middleware.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="postprocessor" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> post<wbr>Processor</h3>
-					<div class="tsd-signature tsd-kind-icon">post<wbr>Processor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
+					<a name="report" class="tsd-anchor"></a>
+					<h3>report</h3>
+					<div class="tsd-signature tsd-kind-icon">report<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/actions.ts#L30">initializers/actions.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/exceptions.ts#L6">initializers/exceptions.ts:6</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Called after the action runs.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="preprocessor" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> pre<wbr>Processor</h3>
-					<div class="tsd-signature tsd-kind-icon">pre<wbr>Processor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
+					<a name="reporters" class="tsd-anchor"></a>
+					<h3>reporters</h3>
+					<div class="tsd-signature tsd-kind-icon">reporters<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/actions.ts#L28">initializers/actions.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/exceptions.ts#L5">initializers/exceptions.ts:5</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Called berore the action runs.  Has access to all params, before sanitizartion.  Can modify the data object for use in actions.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="priority" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> priority</h3>
-					<div class="tsd-signature tsd-kind-icon">priority<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="task" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> task</h3>
+					<div class="tsd-signature tsd-kind-icon">task<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/68e27e89/src/initializers/actions.ts#L26">initializers/actions.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/37b779b1/src/initializers/exceptions.ts#L9">initializers/exceptions.ts:9</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Module load order. Defaults to <code>api.config.general.defaultMiddlewarePriority</code>.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -205,22 +161,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="actionmiddleware.html" class="tsd-kind-icon">Action<wbr>Middleware</a>
+						<a href="exceptionhandlerapi.html" class="tsd-kind-icon">Exception<wbr>HandlerAPI</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="actionmiddleware.html#global" class="tsd-kind-icon">global</a>
+								<a href="exceptionhandlerapi.html#action" class="tsd-kind-icon">action</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="actionmiddleware.html#name" class="tsd-kind-icon">name</a>
+								<a href="exceptionhandlerapi.html#loader" class="tsd-kind-icon">loader</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="actionmiddleware.html#postprocessor" class="tsd-kind-icon">post<wbr>Processor</a>
+								<a href="exceptionhandlerapi.html#report" class="tsd-kind-icon">report</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="actionmiddleware.html#preprocessor" class="tsd-kind-icon">pre<wbr>Processor</a>
+								<a href="exceptionhandlerapi.html#reporters" class="tsd-kind-icon">reporters</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="actionmiddleware.html#priority" class="tsd-kind-icon">priority</a>
+								<a href="exceptionhandlerapi.html#task" class="tsd-kind-icon">task</a>
 							</li>
 						</ul>
 					</li>
