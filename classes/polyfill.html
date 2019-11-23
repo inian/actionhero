@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>StartCluster | actionhero</title>
+	<title>Polyfill | actionhero</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,47 +56,24 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="startcluster.html">StartCluster</a>
+					<a href="polyfill.html">Polyfill</a>
 				</li>
 			</ul>
-			<h1>Class StartCluster</h1>
+			<h1>Class Polyfill</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>TO START IN CONSOLE: &quot;./bin/actionhero start cluster&quot;
-						** Production-ready actionhero cluster **</p>
-						<ul>
-							<li>be sure to enable redis so that workers can share state</li>
-							<li>workers which die will be restarted</li>
-							<li>maser/manager specific logging</li>
-							<li>pidfile for master</li>
-							<li>USR2 restarts (graceful reload of workers while handling requests)
-								-- Note, socket/websocket clients will be disconnected, but there will always be a worker to handle them
-							-- HTTP/HTTPS/TCP clients will be allowed to finish the action they are working on before the server goes down</li>
-							<li>TTOU and TTIN signals to subtract/add workers</li>
-							<li>TCP, HTTP(S), and Web-socket clients will all be shared across the cluster</li>
-							<li>Can be run as a daemon or in-console
-							-- Simple Daemon: &quot;actionhero start cluster --daemon&quot;</li>
-							<li>Setting process titles does not work on windows or OSX
-							This tool was heavily inspired by Ruby Unicorns [[ <a href="http://unicorn.bogomips.org/">http://unicorn.bogomips.org/</a> ]]</li>
-						</ul>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="cli.html" class="tsd-signature-type">CLI</a>
+						<a href="initializer.html" class="tsd-signature-type">Initializer</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">StartCluster</span>
+								<span class="target">Polyfill</span>
 							</li>
 						</ul>
 					</li>
@@ -109,23 +86,25 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="startcluster.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="polyfill.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="startcluster.html#description" class="tsd-kind-icon">description</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="startcluster.html#example" class="tsd-kind-icon">example</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="startcluster.html#inputs" class="tsd-kind-icon">inputs</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="startcluster.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="polyfill.html#loadpriority" class="tsd-kind-icon">load<wbr>Priority</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="polyfill.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="polyfill.html#startpriority" class="tsd-kind-icon">start<wbr>Priority</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="polyfill.html#stoppriority" class="tsd-kind-icon">stop<wbr>Priority</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="startcluster.html#run" class="tsd-kind-icon">run</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="startcluster.html#validate" class="tsd-kind-icon">validate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="polyfill.html#initialize" class="tsd-kind-icon">initialize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="polyfill.html#start" class="tsd-kind-icon">start</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="polyfill.html#stop" class="tsd-kind-icon">stop</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="polyfill.html#validate" class="tsd-kind-icon">validate</a></li>
 							</ul>
 						</section>
 					</div>
@@ -137,17 +116,17 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Start<wbr>Cluster<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="startcluster.html" class="tsd-signature-type">StartCluster</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Polyfill<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="polyfill.html" class="tsd-signature-type">Polyfill</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="cli.html">CLI</a>.<a href="cli.html#constructor">constructor</a></p>
+								<p>Overrides <a href="initializer.html">Initializer</a>.<a href="initializer.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/bin/methods/start/cluster.ts#L23">bin/methods/start/cluster.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/initializers/polyfill.ts#L3">initializers/polyfill.ts:3</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="startcluster.html" class="tsd-signature-type">StartCluster</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="polyfill.html" class="tsd-signature-type">Polyfill</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -155,59 +134,19 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="description" class="tsd-anchor"></a>
-					<h3>description</h3>
-					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="loadpriority" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> load<wbr>Priority</h3>
+					<div class="tsd-signature tsd-kind-icon">load<wbr>Priority<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="cli.html">CLI</a>.<a href="cli.html#description">description</a></p>
+						<p>Inherited from <a href="initializer.html">Initializer</a>.<a href="initializer.html#loadpriority">loadPriority</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/cli.ts#L9">classes/cli.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/initializer.ts#L10">classes/initializer.ts:10</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The description of the CLI command (default this.name)</p>
+							<p>What order should this Initializer load at (Default: 1000, ActionHero core methods are &lt; 1000)</p>
 						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="example" class="tsd-anchor"></a>
-					<h3>example</h3>
-					<div class="tsd-signature tsd-kind-icon">example<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="cli.html">CLI</a>.<a href="cli.html#example">example</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/cli.ts#L11">classes/cli.ts:11</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>An example of how to run this CLI command</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="inputs" class="tsd-anchor"></a>
-					<h3>inputs</h3>
-					<div class="tsd-signature tsd-kind-icon">inputs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="cli.html">CLI</a>.<a href="cli.html#inputs">inputs</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/cli.ts#L13">classes/cli.ts:13</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The inputs of the CLI command (default: {})</p>
-						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
-							</li>
-						</ul>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
@@ -215,14 +154,46 @@
 					<h3>name</h3>
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="cli.html">CLI</a>.<a href="cli.html#name">name</a></p>
+						<p>Inherited from <a href="initializer.html">Initializer</a>.<a href="initializer.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/cli.ts#L7">classes/cli.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/initializer.ts#L8">classes/initializer.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The name of the CLI command.</p>
+							<p>The name of the Initializer.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="startpriority" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> start<wbr>Priority</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Priority<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="initializer.html">Initializer</a>.<a href="initializer.html#startpriority">startPriority</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/initializer.ts#L12">classes/initializer.ts:12</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>What order should this Initializer start at (Default: 1000, ActionHero core methods are &lt; 1000)</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="stoppriority" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stop<wbr>Priority</h3>
+					<div class="tsd-signature tsd-kind-icon">stop<wbr>Priority<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="initializer.html">Initializer</a>.<a href="initializer.html#stoppriority">stopPriority</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/initializer.ts#L14">classes/initializer.ts:14</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>What order should this Initializer stop at (Default: 1000, ActionHero core methods are &lt; 1000)</p>
 						</div>
 					</div>
 				</section>
@@ -230,31 +201,84 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-					<a name="run" class="tsd-anchor"></a>
-					<h3>run</h3>
+					<a name="initialize" class="tsd-anchor"></a>
+					<h3>initialize</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">run<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">initialize<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="cli.html">CLI</a>.<a href="cli.html#run">run</a></p>
+								<p>Overrides <a href="initializer.html">Initializer</a>.<a href="initializer.html#initialize">initialize</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/bin/methods/start/cluster.ts#L53">bin/methods/start/cluster.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/initializers/polyfill.ts#L10">initializers/polyfill.ts:10</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>__namedParameters: <span class="tsd-signature-type">object</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
-										</li>
-									</ul>
+									<h5>config: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="start" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> start</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/configinterface.html" class="tsd-signature-type">ConfigInterface</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="initializer.html">Initializer</a>.<a href="initializer.html#start">start</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/initializer.ts#L31">classes/initializer.ts:31</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method run as part of the <code>start</code> lifecycle of your server.  Ususally connects to remote servers or processes..</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>config: <a href="../interfaces/configinterface.html" class="tsd-signature-type">ConfigInterface</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="stop" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stop</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">stop<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/configinterface.html" class="tsd-signature-type">ConfigInterface</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="initializer.html">Initializer</a>.<a href="initializer.html#stop">stop</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/initializer.ts#L36">classes/initializer.ts:36</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method run as part of the <code>initialize</code> lifecycle of your server.  Ususally disconnects from remote servers or processes.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>config: <a href="../interfaces/configinterface.html" class="tsd-signature-type">ConfigInterface</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -267,9 +291,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="cli.html">CLI</a>.<a href="cli.html#validate">validate</a></p>
+								<p>Inherited from <a href="initializer.html">Initializer</a>.<a href="initializer.html#validate">validate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/cli.ts#L45">classes/cli.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/ffd65041/src/classes/initializer.ts#L38">classes/initializer.ts:38</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -294,28 +318,34 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="startcluster.html" class="tsd-kind-icon">Start<wbr>Cluster</a>
+						<a href="polyfill.html" class="tsd-kind-icon">Polyfill</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-								<a href="startcluster.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="polyfill.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="startcluster.html#description" class="tsd-kind-icon">description</a>
+								<a href="polyfill.html#loadpriority" class="tsd-kind-icon">load<wbr>Priority</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="startcluster.html#example" class="tsd-kind-icon">example</a>
+								<a href="polyfill.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="startcluster.html#inputs" class="tsd-kind-icon">inputs</a>
+								<a href="polyfill.html#startpriority" class="tsd-kind-icon">start<wbr>Priority</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="startcluster.html#name" class="tsd-kind-icon">name</a>
+								<a href="polyfill.html#stoppriority" class="tsd-kind-icon">stop<wbr>Priority</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="startcluster.html#run" class="tsd-kind-icon">run</a>
+								<a href="polyfill.html#initialize" class="tsd-kind-icon">initialize</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="startcluster.html#validate" class="tsd-kind-icon">validate</a>
+								<a href="polyfill.html#start" class="tsd-kind-icon">start</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="polyfill.html#stop" class="tsd-kind-icon">stop</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="polyfill.html#validate" class="tsd-kind-icon">validate</a>
 							</li>
 						</ul>
 					</li>
