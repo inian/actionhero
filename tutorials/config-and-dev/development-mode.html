@@ -81,14 +81,6 @@
 					<li>If you have changed the <code>task.frequency</code> of a periodic task, you will continue to use the old value until the task fires at least once after the change</li>
 					<li>Changing configs, initializers, or servers, will attempt to do a &quot;full&quot; reboot the server rather than just reload that component.</li>
 				</ul>
-				<a href="#watching-custom-files" id="watching-custom-files" style="color: inherit; text-decoration: none;">
-					<h2>Watching Custom Files</h2>
-				</a>
-				<pre><code class="language-js">api.watchFileAndAct(path_to_file, () =&gt; {
-  api.log(<span class="hljs-string">'rebooting due to config change: '</span> + path_to_file, <span class="hljs-string">'info'</span>)
-  api.commands.restart()
-});</code></pre>
-				<p>You can use ActionHero&#39;s <code>api.watchFileAndAct()</code> method to watch additional files your application may have.  Use this to extend developmentMode when adding new types of files, like database models.</p>
 				<a href="#debugging" id="debugging" style="color: inherit; text-decoration: none;">
 					<h2>Debugging</h2>
 				</a>
@@ -119,7 +111,7 @@ Running <span class="hljs-string">"console"</span> task
 ‘showDocumentation'</span>,
 ‘sleepTest<span class="hljs-string">',
 ‘status'</span> ]</code></pre>
-				<p>ActionHero has a command-line interface called a REPL! This means you can spin up a new instance of ActionHero and manually call all the methods on the <code>api</code> namespace. This combined with the new RPC tools make this a powerful debugging and development tool. Running <code>actionhero console</code> will load up a version of ActionHero in your terminal where you have access to the <code>api</code> object. This version of the server will <code>boot</code>, <code>initialize</code>, and <code>start</code>, but will skip booting any <code>servers</code>.  You will be connected to any databases per your initializers.</p>
+				<p>ActionHero has a command-line interface called a REPL! This means you can spin up a new instance of ActionHero and manually call all the methods on the <code>api</code> namespace. This combined with the new RPC tools make this a powerful debugging and development tool. Running <code>actionhero console</code> will load up a version of ActionHero in your terminal where you have access to the <code>api</code> object. This version of the server will <code>boot</code>, <code>initialize</code>, and <code>start</code>, but will skip booting any <code>servers</code>. You will be connected to any databases per your initializers.</p>
 				<p>The REPL will:</p>
 				<ul>
 					<li>source <code>NODE_ENV</code> properly to load the config</li>
