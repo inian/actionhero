@@ -123,7 +123,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L395">src/modules/task.ts:395</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L395">src/modules/task.ts:395</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -146,12 +146,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L229">src/modules/task.ts:229</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L229">src/modules/task.ts:229</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Retrun all delayed jobs, orginized by the timetsamp at where they are to run at.
+									<p>Return all delayed jobs, organized by the timestamp at where they are to run at.
 										Note: This is a very slow command.
 									Will throw an error if redis cannot be reached.</p>
 								</div>
@@ -170,7 +170,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L257">src/modules/task.ts:257</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L257">src/modules/task.ts:257</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -193,13 +193,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L303">src/modules/task.ts:303</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L303">src/modules/task.ts:303</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>If a worker process crashes, it will leave its state in redis as &quot;working&quot;.
-										You can remove workers from redis you know to be over, by specificing an age which would make them too old to exist.
+										You can remove workers from redis you know to be over, by specificizing an age which would make them too old to exist.
 										This method will remove the data created by a &#39;stuck&#39; worker and move the payload to the error queue.
 										However, it will not actually remove any processes which may be running.  A job <em>may</em> be running that you have removed.
 									Will throw an error if redis cannot be reached.</p>
@@ -225,7 +225,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L112">src/modules/task.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L112">src/modules/task.ts:112</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -236,7 +236,7 @@
 								<p>Inputs:</p>
 								<ul>
 									<li>q: Which queue/priority is the task stored on?</li>
-									<li>taskName: The name of the job, likley to be the same name as a tak.</li>
+									<li>taskName: The name of the job, likely to be the same name as a tak.</li>
 									<li>args: The arguments of the job.  Note, arguments passed to a Task initially may be modified when enqueuing.  It is best to read job properties first via <code>api.tasks.queued</code> or similar method.</li>
 									<li>count: Of the jobs that match q, taskName, and args, up to what position should we delete? (Default 0; this command is 0-indexed)</li>
 								</ul>
@@ -275,7 +275,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L131">src/modules/task.ts:131</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L131">src/modules/task.ts:131</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -286,7 +286,7 @@
 								<p>Inputs:</p>
 								<ul>
 									<li>q: Which queue/priority is to run on?</li>
-									<li>taskName: The name of the job, likley to be the same name as a tak.</li>
+									<li>taskName: The name of the job, likely to be the same name as a tak.</li>
 									<li>args  The arguments of the job.  Note, arguments passed to a Task initially may be modified when enqueuing. It is best to read job properties first via <code>api.tasks.delayedAt</code> or similar method.</li>
 								</ul>
 							</div>
@@ -321,7 +321,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L204">src/modules/task.ts:204</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L204">src/modules/task.ts:204</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -350,7 +350,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L187">src/modules/task.ts:187</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L187">src/modules/task.ts:187</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -379,7 +379,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L220">src/modules/task.ts:220</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L220">src/modules/task.ts:220</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -408,7 +408,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L379">src/modules/task.ts:379</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L379">src/modules/task.ts:379</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -431,7 +431,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L54">src/modules/task.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L54">src/modules/task.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -471,7 +471,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L330">src/modules/task.ts:330</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L330">src/modules/task.ts:330</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -494,7 +494,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L72">src/modules/task.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L72">src/modules/task.ts:72</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -543,7 +543,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L92">src/modules/task.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L92">src/modules/task.ts:92</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -553,7 +553,7 @@
 								</div>
 								<p>Inputs:</p>
 								<ul>
-									<li>timestamp: At what time the task is able to be run.  Does not gaurentee that the task will be run at this time. (in ms)</li>
+									<li>timestamp: At what time the task is able to be run.  Does not guarantee that the task will be run at this time. (in ms)</li>
 									<li>taskName: The name of the task.</li>
 									<li>params: Params to pass to the task.</li>
 									<li>queue: (Optional) Which queue/priority to run this instance of the task on.</li>
@@ -593,7 +593,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L312">src/modules/task.ts:312</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L312">src/modules/task.ts:312</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -623,7 +623,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L273">src/modules/task.ts:273</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L273">src/modules/task.ts:273</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -655,7 +655,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L265">src/modules/task.ts:265</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L265">src/modules/task.ts:265</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -678,7 +678,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L196">src/modules/task.ts:196</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L196">src/modules/task.ts:196</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -702,7 +702,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L175">src/modules/task.ts:175</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L175">src/modules/task.ts:175</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -743,7 +743,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L284">src/modules/task.ts:284</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L284">src/modules/task.ts:284</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -772,7 +772,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L292">src/modules/task.ts:292</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L292">src/modules/task.ts:292</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -801,7 +801,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L149">src/modules/task.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L149">src/modules/task.ts:149</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -812,7 +812,7 @@
 								<p>Inputs:</p>
 								<ul>
 									<li>q: Which queue/priority is to run on?</li>
-									<li>taskName: The name of the job, likley to be the same name as a tak.</li>
+									<li>taskName: The name of the job, likely to be the same name as a tak.</li>
 									<li>args: The arguments of the job.  Note, arguments passed to a Task initially may be modified when enqueuing.  It is best to read job properties first via <code>api.tasks.delayedAt</code> or similar method.</li>
 								</ul>
 							</div>
@@ -847,12 +847,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L162">src/modules/task.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L162">src/modules/task.ts:162</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Return all resque stats for this namespace (how jobs failed, jobs succeded, etc)
+									<p>Return all resque stats for this namespace (how jobs failed, jobs succeeded, etc)
 									Will throw an error if redis cannot be reached.</p>
 								</div>
 							</div>
@@ -870,7 +870,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L358">src/modules/task.ts:358</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L358">src/modules/task.ts:358</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -899,7 +899,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L212">src/modules/task.ts:212</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L212">src/modules/task.ts:212</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -922,12 +922,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L238">src/modules/task.ts:238</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L238">src/modules/task.ts:238</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Retrun all workers registered by all members of this cluster.
+									<p>Return all workers registered by all members of this cluster.
 										Note: MultiWorker processors each register as a unique worker.
 									Will throw an error if redis cannot be reached.</p>
 								</div>
@@ -946,7 +946,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/14049cbd/src/modules/task.ts#L246">src/modules/task.ts:246</a></li>
+									<li>Defined in <a href="https://github.com/actionhero/actionhero/blob/d6167bf5/src/modules/task.ts#L246">src/modules/task.ts:246</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
